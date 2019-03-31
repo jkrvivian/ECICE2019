@@ -11,14 +11,14 @@
 %
 \titlerunning{Streaming Data Marketplace}  % abbreviated title (for running head)
 %
-\author{Ching-Chun Huang \and Jing-Hua Lin
+\author{Ching-Chun Huang \and Ching-Hua Lin
 }
 %
 \authorrunning{Ching-Chun Huang et al.} % abbreviated author list (for running head)
-\tocauthor{Ching-Chun Huang, Jing-Hua Lin}
+\tocauthor{Ching-Chun Huang, Ching-Hua Lin}
 %
-\institute{Cheng-Kung University, Tainan, Taiwan,\\
-\email{jserv.tw@gmail.com}
+\institute{National Cheng Kung University, Taiwan\\
+\email{jserv.tw@gmail.com, jkrvivian@gmail.com}
 }
 
 \maketitle              % typeset the title of the contribution
@@ -33,13 +33,41 @@ abstract here
 \section{Introduction}
 
 \section{Related Work}
+The increasing IoT devices brings a huge amount of data, the economic value becomes essential for parties intended to sell, buy and find data. The need for IoT data marketplace arises due to this. Recent years, several researchers has started to explore based on this concept. There are some critical issues need to be resolved in the design of data marketplace platform, in this paper, we focus on two issues, data integrity and the trading behavior.
+
+To ensure data integrity for IoT applications is always a challenge because of the unstandardize data format and dynamic nature. Moreover, the Third Party Auditors (TPAs)-based frameworks is far from being satisfactory. Therefore a decentralized data integrity validation has been proposed recent years, and blockchain is considered a solution. 
+
+Data Integrity as a Service (DIaas) is a blockchain based framework for data integrity proposed by Bin Liu\cite{DIaas}. DIaas is a Cloud Server Service (CSS) for IoT dynamic data that allows both data owner and data consumer to validate data integrity by comparing hashes on smart contract  and on Cloud Server. Besides, smart contract can also realize the purchase agreement, including authorizing data consumer for specific data set and even the penalty for data provider if they fail to provide the data integrity. However, the performance analysis shows that IoT devices still have low efficiency interacting with Etheruem, this may fall to the Proof-of-Work (PoW) process is time-consuming for an IoT device and the blockchain consensus can not be reached within a short time, while Ethereum is expected to enable consensus within 12-second but the time is still longer when the authors wrote the paper. 
+
+By solving the inefficiencies of the Blockchain, \textbf{IOTA}\cite{IOTAwhitepaper} is a cryptocurrency for the IoT industry or Web 3.0 based on the revolutionary distributed ledger technology, the \textbf{Tangle}. It is a secure, scalable and feeless transaction settlement layer which enables micropayments transaction. On top of that, Masked Authenticated Messaging(MAM)\cite{MAM}, a second layer data communication protocol which adds functionality to emit and access an encrypted data stream over the Tangle where privacy and integrity meet is introduced to public. On the basis of the Tangle and MAM, IOTA foundation proposed a fully decentralized Data MarketPlace which is suitable for IoT streaming data that not only allow data owners and consumers to trade on Tangle but also protect privacy and assure data integrity from source with MAM. But only the data buyout doesn't meet the need of the real world, such as data subscription and a specific time period of data maybe needed for different uses. Moreover, even though IOTA needs less computing power than other blockchain system, doing PoW and unstable network environment are still the bottleneck for low-level devices, it may take 2 or more minutes to issue a transaction to Tangle under MAM protocol.
+
+Our proposed framework is developed based on IOTA Data Marketplace. We aim to solve the efficiency and reliability issue for low-level devices in blockchain system and to make the buying and selling process closer to real world that meet actual needs and usages.
+
+
+
+
+
+
+
+  
+
+
+
+
 
 % ---- Bibliography ----
-\begin{thebibliography}{1}
+\begin{thebibliography}{3}
 %
-%\bibitem {smit:wat}
-%Smith, T.F., Waterman, M.S.: Identification of common molecular subsequences.
-%J. Mol. Biol. 147, 195?197 (1981). \url{doi:10.1016/0022-2836(81)90087-5}
+\bibitem {DIaas}
+Bin Liu, Xiao Liang Yu, Shiping Chen, Xiwei Xu and Liming Zhu. 
+Blockchain based Data Integrity Service Framework for IoT data. In IEEE 24th International Conference on Web Services 2017. 
+
+\bibitem {IOTAwhitepaper}
+S. Popov. Iota whitepaper. Technical White Paper. 2017
+
+\bibitem {MAM}
+Paul Handy. Masked Authenticated Messaging. Medium. 2017
+\url https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e
 
 \end{thebibliography}
 \end{document}
