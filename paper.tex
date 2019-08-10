@@ -1,34 +1,51 @@
-\documentclass{svproc}
+\documentclass[journal,a4paper]{IEEEtran}
 
 % to typeset URLs, URIs, and DOIs
+\usepackage[english]{babel}
 \usepackage{url}
-\def\UrlFont{\rmfamily}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{url,hyperref,graphicx,float,times}
+\usepackage{textcomp}
+\usepackage{cite}
+\usepackage[caption=false,font=footnotesize]{subfig}
+
 
 \begin{document}
-\mainmatter              % start of a contribution
 %
-\title{Data Marketplace for Streaming Data}
+\title{Decentralized Data Marketplace to Enable Trusted Machine Economy}
 %
-\titlerunning{Streaming Data Marketplace}  % abbreviated title (for running head)
-%
-\author{Ching-Chun Huang \and Ching-Hua Lin
-}
-%
-\authorrunning{Ching-Chun Huang et al.} % abbreviated author list (for running head)
-\tocauthor{Ching-Chun Huang, Ching-Hua Lin}
-%
-\institute{National Cheng Kung University, Taiwan\\
-\email{jserv.tw@gmail.com, jkrvivian@gmail.com}
+\author{
+%%% Fill in name here
+\IEEEauthorblockN{Ching-Chun (Jim) Huang\IEEEauthorrefmark{1}, Ching-Hua Lin\IEEEauthorrefmark{2}} \\
+
+%%% Fill in school here
+\IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Information Engineering National Cheng Kung University} \\
+
+%%% Fill in address here
+\IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}No.1, University Road} \\
+
+%%% Fill in city and country here
+\IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Tainan City, Taiwan (R.O.C.)} \\
+
+%%% Fill in email here
+\IEEEauthorblockA{\IEEEauthorrefmark{1}jserv.tw@gmail.com, \IEEEauthorrefmark{2}jkrvivian@gmail.com}
 }
 
-\maketitle              % typeset the title of the contribution
 
-%at least 70 words, at most 150 words
-%It will be set in 9-point font size and be inset 1.0 cm from the right and left margins.
+%
+
+
+\maketitle              
+% 50-80 words
 \begin{abstract}
 abstract here
-\keywords{streaming data, crowd sensing, data marketplace}
 \end{abstract}
+
+% 3 - 4 keywords
+\begin{IEEEkeywords}
+streaming data, crowd sensing, data marketplace, decentralization
+\end{IEEEkeywords}
 
 \section{Introduction}
 
@@ -44,8 +61,11 @@ By solving the inefficiencies of the Blockchain, \textbf{IOTA}\cite{IOTAwhitepap
 Our proposed framework is developed based on IOTA Data Marketplace. We aim to solve the efficiency and reliability issue for low-level devices in blockchain system and to make the buying and selling process closer to real world that meet actual needs and usages.
 
 
+\section{System Architecture}
 
+\section{Trading Model}
 
+\section{Conclusion}
 
 
 
@@ -56,18 +76,8 @@ Our proposed framework is developed based on IOTA Data Marketplace. We aim to so
 
 
 % ---- Bibliography ----
-\begin{thebibliography}{3}
-%
-\bibitem {DIaas}
-Bin Liu, Xiao Liang Yu, Shiping Chen, Xiwei Xu and Liming Zhu. 
-Blockchain based Data Integrity Service Framework for IoT data. In IEEE 24th International Conference on Web Services 2017. 
+\bibliographystyle{IEEEtran}
+\bibliography{references}
 
-\bibitem {IOTAwhitepaper}
-S. Popov. Iota whitepaper. Technical White Paper. 2017
 
-\bibitem {MAM}
-Paul Handy. Masked Authenticated Messaging. Medium. 2017
-\url https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e
-
-\end{thebibliography}
 \end{document}
