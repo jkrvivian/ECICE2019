@@ -68,16 +68,16 @@ Our proposed data marketplace framework is a 3-tier decentralized and trustless 
 There are four major roles in the decentralized data marketplace.
 
 \subsubsection{Registrar}
-Registrar is responsible for creating the Registration Contract and adding new data providers, consumers and brokers to the decentralized data marketplace.
+Registrar is responsible for creating a Registration Contract, which preserves a lookup table of participants, and adding new data providers, consumers and brokers to the decentralized data marketplace.
 
-\subsubsection{Provider}
-Data providers are sensor owners who are willing to sell sensing data to consumers. They decide the subscription period, subscription price, data type, sampling frequency. Afterward, they can launch the product on the decentralized data marketplace. Next, they collect the raw data with their sensors and send it to the broker who will assist in uploading it to the network. A MAM channel\cite{MAM} is used to store the encrypted data stream.
+\subsubsection{Data Provider}
+Data providers, who generate and preserve IoT data, are willing to sell sensing data to consumers. They decide the subscription period, subscription price, data type, sampling frequency. Afterward, they can launch the product on the decentralized data marketplace. Next, they collect raw data with their sensors and send it to the broker who will assist in uploading it to the network. A MAM channel\cite{MAM} is used to store  encrypted data stream.
 
 \subsubsection{Consumer}
 Consumers aspire to obtain IoT data to promote the value of their service. However, it is a big challenge for most consumers to collect the desired data by themselves. So they look forward to purchasing the IoT data from data providers.
 
 \subsubsection{Broker}
-Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the data provider requests a broker to create a new MAM channel, a Product Contract and upload this product to the IPFS (InterPlanetary File System)\cite{IPFS}. Also the broker certifies the session key which is used for symmetric encryption for streaming data encryption and decryption. Then the broker provides the matching service for data provider’s products and consumer’s queries. After that, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel.
+Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the data provider requests a broker to create a new MAM channel, a new Product Contract, which specifies details about products, and upload this product to the IPFS (InterPlanetary File System)\cite{IPFS}. Also the broker certifies the session key which is used for symmetric encryption for streaming data encryption and decryption. Then the broker provides the matching service for data provider’s products and consumer’s queries. After that, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel.
 
 \section{Trading Model}
 
