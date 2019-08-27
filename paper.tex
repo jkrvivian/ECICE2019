@@ -94,6 +94,8 @@ MAM\cite{MAM} is one of the best features of IOTA, it is a second layer data com
 IOTA only allows one message per transaction and couldn't publish continuous related messages because it is easy for an attacker to issue spam transactions if the same address is used. However, MAM publishes each message to a different addresses, and each can be derived from the previous one, this mechanism protects the channel from spamming and allows us to have access to all information with channel root only. Furthermore, MAM can be used in 3 ways to control visibility and access which are public, restricted and private. In our system, restricted MAM channel is used to achieve data authoriazation between providers and consumers.
 
 \subsubsection{TangleID}
+TangleID\cite{TangleID} is a self-soverign identity system based on IOTA, the goal is to establish a solution that do not require any third-party authority to verify an identity and its digital footprint. In TangleID, the digital footprint is converted into digital assets with the principle of Decentralized Identifiers (DIDs) defined by W3C, and by putting DID documents on MAM makes TangleID a GDPR-Complianced system. Each identity has a public/private key pair recorded on MAM, it is used in digital signature for identity authentication. With every participant in data marketplace registers on TangleID, one can easily verify data provider's identity and data integrity with the public key on the DID document, and that we can ensure the reliability of data sources.
+
 
 \subsubsection{blind signature}
 
