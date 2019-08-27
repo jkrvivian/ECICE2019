@@ -88,7 +88,10 @@ Smart contract\cite{smartContract} is a protocol for formulating agreement on bl
 
 \subsubsection{IPFS}
 
-\subsubsection{MAM}
+\subsubsection{Masked Authenticated Messaging}
+MAM\cite{MAM} is one of the best features of IOTA, it is a second layer data communication protocol enables to emit and access an encrypted data stream over Tangle network. The consensus algorithm of IOTA ensures data integrity. These properties allow MAM to meet the requirements of both data integrity and privacy.
+
+IOTA only allows one message per transaction and couldn't publish continuous related messages because it is easy for an attacker to issue spam transactions if the same address is used. However, MAM publishes each message to a different addresses, and each can be derived from the previous one, this mechanism protects the channel from spamming and allows us to have access to all information with channel root only. Furthermore, MAM can be used in 3 ways to control visibility and access which are public, restricted and private. In our system, restricted MAM channel is used to achieve data authoriazation between providers and consumers.
 
 \subsubsection{TangleID}
 
