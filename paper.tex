@@ -98,8 +98,8 @@ IOTA only allows one message per transaction and couldn't publish continuous rel
 TangleID\cite{TangleID} is a self-soverign identity system based on IOTA, the goal is to establish a solution that do not require any third-party authority to verify an identity and its digital footprint. In TangleID, the digital footprint is converted into digital assets with the principle of Decentralized Identifiers (DIDs) defined by W3C, and by putting DID documents on MAM makes TangleID a GDPR-Complianced system. Each identity has a public/private key pair recorded on MAM, it is used in digital signature for identity authentication. With every participant in data marketplace registers on TangleID, one can easily verify data provider's identity and data integrity with the public key on the DID document, and that we can ensure the reliability of data sources.
 
 
-\subsubsection{blind signature}
-
+\subsubsection{Blind Signature}
+Blind signature\cite{blindSig} is a form of digital signature where the message is blinded before it is signed, and the resulting blind signature can be verified publicly against the original. To perform such a signature, the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it. Furthermore, only one blind-signatured secret key is valid for trading and it is not allowed to be updated. By putting the secret key on smart contract prevents malicious providers trades invalid secret keys to consumers privately. 
 
 \section{Trading Model}
 
