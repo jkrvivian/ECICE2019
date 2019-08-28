@@ -99,17 +99,17 @@ Once a consumer who want to subscribe the sensor data pays a subscription fee to
 \subsection{Refunding}
 It is probable that the sensor is malfunctioning after the subscribers pay the subscription fee. To protect subscribers' right, the subscription fee are not transfered to the data provider until all data is generated and uploaded to the MAM channel. If the expected data is not available, subscribers can ask for refunds. We assume that less than half of subscribers in the Product Contract are irrational and malicious. Each subscriber can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at $k$th data samples, the subscription fee is proportionally transfered to the data provider, broker and every subscriber. The subscription fee can be prorated as below:
 
-\begin{equation*}
+\begin{equation}
 F_{DataProvider}(k) = N price \frac{k-1}{M} (1-F_{b}) (1-F_{t})
-\end{equation*}
+\end{equation}
 
-\begin{equation*}
+\begin{equation}
 F_{Broker}(k) = N price \frac{k-1}{M} F_{b} (1-F_{t})
-\end{equation*}
+\end{equation}
 
-\begin{equation*}
+\begin{equation}
 F_{Consumer}(k) = price \frac{M-k+1}{M} (1-F_{t})
-\end{equation*}
+\end{equation}
 
 Where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ is the brokerage fee(\%), $F_{t}$ is the transaction fee of the smart contract(\%), $N$ is the number of subscribers in this contract.
 
