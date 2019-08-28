@@ -10,6 +10,7 @@
 \usepackage{cite}
 \usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{amsmath}
+\graphicspath{ {./images/} }
 
 
 \begin{document}
@@ -114,10 +115,24 @@ To sell the sensing data, a data provider has to launch a new product on the dat
 
 Brokers certify session keys as well. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. When a data provider asks a broker to ceritfy new session key, the data provider uses the broker's public key, which is available in the Registration Contact after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key to the broker. The broker signs the message and returns the signature to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{key_certification}
+	\caption{Session key certification with blind signature}
+	\label{fig:key_certification}
+\end{figure}
+
 The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and start trading with the data provider if the consumer is interested in subscribing the data.
 
 \subsection{Trading}
 Once a consumer who want to subscribe the sensor data pays a subscription fee to the Product Contract, it is added to the subscriber list automatically by the smart contract. To decrypt the streaming data on the MAM channel, session key should be exchanged between data provider and subscribers. The data provider requests the subscription list maintained by the Product Contract and obtains accounts of each subscriber. After that, the data provider can also get public keys of each subscriber from the Registration Contact with their accounts. For each subscriber, the data provider encrypts the session key and broker's signature with the subscriber's public key and sends the ciphertext to the Product Contract. Subscribers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key and signature. Subscribers can obtain the broker's public key on the Registration Contact as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted sensing data is uploaded to the MAM channel, and subscribers can download and decrypt them with the session¸
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{key_exchange}
+	\caption{Session key exchange between the data provider and consumer}
+	\label{fig:key_exchange}
+\end{figure}
 
 \subsection{Refunding}
 It is probable that the sensor is malfunctioning after the subscribers pay the subscription fee. To protect subscribers' right, the subscription fee are not transfered to the data provider until all data is generated and uploaded to the MAM channel. If the expected data is not available, subscribers can ask for refunds. We assume that less than half of subscribers in the Product Contract are irrational and malicious. Each subscriber can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at $k$th data samples, the subscription fee is proportionally transfered to the data provider, broker and every subscriber. The subscription fee can be prorated as below:
