@@ -9,6 +9,7 @@
 \usepackage{textcomp}
 \usepackage{cite}
 \usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{amsmath}
 
 
 \begin{document}
@@ -80,6 +81,17 @@ Consumers aspire to obtain IoT data to promote the value of their service. Howev
 Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the data provider requests a broker to create a new MAM channel, a new Product Contract, which specifies details about products, and upload this product to the IPFS (InterPlanetary File System)\cite{IPFS}. Also the broker certifies the session key which is used for symmetric encryption for streaming data encryption and decryption. Then the broker provides the matching service for data provider’s products and consumer’s queries. After that, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel.
 
 \section{Trading Model}
+In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
+
+\subsection{Participants Registration}
+At the beginning, the registrar creates a Registration Contact, which maintains all participants' information, including their DID (Decentralized Identifiers) information and public keys. Then some preselected brokers who are trustworthy are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications.
+
+\subsection{Launching and Searching Products}
+To sell the sensing data, a data provider has to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract.
+
+Brokers certify session keys as well. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. When a data provider asks a broker to ceritfy new session key, the data provider uses the broker's public key, which is available in the Registration Contact after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key to the broker. The broker signs the message and returns the signature to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers.
+
+The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and start trading with the data provider if the consumer is interested in subscribing the data.
 
 \section{Conclusion}
 
