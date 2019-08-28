@@ -108,10 +108,24 @@ Blind signature\cite{blindSig} is a form of digital signature where the message 
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
 
 \subsection{Participants Registration}
-At the beginning, the registrar creates a Registration Contact, which maintains all participants' information, including their DID (Decentralized Identifiers) information and public keys. Then some preselected brokers who are trustworthy are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications.
+At the beginning, the registrar creates a Registration Contact (Figure \ref{fig:registration_contract}), which maintains all participants' information, including their DID (Decentralized Identifiers) information and public keys. Then some preselected brokers who are trustworthy are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{registration_contract}
+	\caption{Registration Contract.}
+	\label{fig:registration_contract}
+\end{figure}
 
 \subsection{Launching and Searching Products}
-To sell the sensing data, a data provider has to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract.
+To sell the sensing data, a data provider has to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract (Figure \ref{fig:product_contract}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{product_contract}
+\caption{Product Contract.}
+\label{fig:product_contract}
+\end{figure}
 
 Brokers certify session keys as well. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key, the data provider uses the broker's public key, which is available in the Registration Contact after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key to the broker. The broker signs the message and returns the signature to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers.
 
