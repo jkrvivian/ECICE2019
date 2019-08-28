@@ -79,6 +79,28 @@ Consumers aspire to obtain IoT data to promote the value of their service. Howev
 \subsubsection{Broker}
 Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the data provider requests a broker to create a new MAM channel, a new Product Contract, which specifies details about products, and upload this product to the IPFS (InterPlanetary File System)\cite{IPFS}. Also the broker certifies the session key which is used for symmetric encryption for streaming data encryption and decryption. Then the broker provides the matching service for data provider’s products and consumer’s queries. After that, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel.
 
+\subsection{Component}
+\subsubsection{IOTA}
+IOTA\cite{IOTAwhitepaper} is a cryptocurrency which the ledger does not consist of transactions grouped into blocks and stored in sequential chains, but a directed acyclic graph(DAG) of individual transactions, \textbf{Tangle}. To issue a transaction in the network, one needs to perform a small amount of Proof-of-Work (PoW) that verifies two previous transactions. Since every actor in Tangle has the same role, there is no need to offer transaction fees. Therefore, it is possible to make \textbf{micropayments} which the importance will increase in the rapidly developing IoT industry, and \textbf{zero-transactions} that one could store information securely within Tangle transactions. Moreover, this structure also enables high scalability of transactions that could resolve the drawbacks of blockchain and the concern of rapid growth of IoT devices.
+
+\subsubsection{Ethereum Smart Contract}
+Smart contract\cite{smartContract} is a protocol for formulating agreement on blockchain that provides verification and execution of the contract. The code in the smart contract could interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are transparent and with enforcement. The appearance of smart contracts makes trading more flexible, and achieves more complex trading patterns in reality.
+
+\subsubsection{IPFS}
+Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to upload the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
+
+\subsubsection{Masked Authenticated Messaging}
+MAM\cite{MAM} is one of the best features of IOTA, it is a second layer data communication protocol enables to emit and access an encrypted data stream over Tangle network. The consensus algorithm of IOTA ensures data integrity. These properties allow MAM to meet the requirements of both data integrity and privacy.
+
+IOTA only allows one message per transaction and couldn't publish continuous related messages because it is easy for an attacker to issue spam transactions if the same address is used. However, MAM publishes each message to a different addresses, and each can be derived from the previous one, this mechanism protects the channel from spamming and allows us to have access to all information with channel root only. Furthermore, MAM can be used in 3 ways to control visibility and access which are public, restricted and private. In our system, restricted MAM channel is used to achieve data authoriazation between providers and consumers.
+
+\subsubsection{TangleID}
+TangleID\cite{TangleID} is a self-soverign identity system based on IOTA, the goal is to establish a solution that do not require any third-party authority to verify an identity and its digital footprint. In TangleID, the digital footprint is converted into digital assets with the principle of Decentralized Identifiers (DIDs)\cite{DID} defined by W3C, and by putting DID documents on MAM makes TangleID a GDPR-Complianced system. Each identity has a public/private key pair recorded on MAM, it is used in digital signature for identity authentication. With every participant in data marketplace registers on TangleID, one can easily verify data provider's identity and data integrity with the public key on the DID document, and that we can ensure the reliability of data sources.
+
+
+\subsubsection{Blind Signature}
+Blind signature\cite{blindSig} is a form of digital signature where the message is blinded before it is signed, and the resulting blind signature can be verified publicly against the original. To perform such a signature, the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it. Furthermore, only one blind-signatured secret key is valid for trading and it is not allowed to be updated. By putting the secret key on smart contract prevents malicious providers trades invalid secret keys to consumers privately. 
+
 \section{Trading Model}
 
 \section{Conclusion}
