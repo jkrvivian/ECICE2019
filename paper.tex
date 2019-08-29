@@ -117,8 +117,8 @@ Blind signature\cite{blindSig} is a form of digital signature where the message 
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
 
 In our game theory model there are two kinds of players. One is data provider, and the other one is data buyer. Data provider would receive subscription fee for buying data each time the data is transmitted to data buyer.
-The data buyer will keep buying data from data povider, only when the data sold by the data provider with high enough correct rate, $P_r$. We deonte this correct rate threshold with $\xi$.
-Once the correct rate is lower than $\xi$, the data buyers would consider this data provider as a malicious data provider, and reject to buy the data from this data provider. 
+The data buyer will keep buying data from data povider, only when the data sold by the data provider with high enough accuracy, $P_r$. We deonte this accuracy threshold with $\xi$.
+Once the accuracy is lower than $\xi$, the data buyers would consider this data provider as a low quality data provider, and reject to buy the data from this data provider.
 
 
 
@@ -186,10 +186,11 @@ To refund or withdraw subscription fee from the smart contract, data provider, b
 
 \subsection{Game Theory Evaluation}
 
-\subsubsection{Model Description}
 Repeated game consists of serveral repetitions of some stage games. In each stage game, the action player takes will effect the actions that players are going to take in the future stages. Repeated game can be illustrated with a decision tree and described their payoff with discounted sum of payoff. Discounted sum of payoff can capture the idea that what the players truly pursue is the sum of payoff in all stages and payoff in different stages may varify.
 
 We use a repeated game to express the scenario of our Data Marketplace. Figure.\ref{fig:decision_tree} shows the decision tree to depict the the repeated game we used. Each level in this decision tree represents each round of data transmission from data provider to data buyers, and the data buyers would pay subscription fee, $P_s$, in total to buy the data.
+
+Refund is a major issue in our research. However, we don't have to take refund as a factor in our repeated game, since in our decentralized data marketplace we use smart contract to store the subscription fee which will be paid to buy the future data. The subscription fee will be paid as data provider provides new data. In other words, data provide doesn't need to take any procedure to transer subscription fee from his/her own account to data buyers' account. For the same reason, data provider has no responsibility on the refunding processing fee charged by the smart contract as well.
 
 \begin{figure} \centering \includegraphics[width=3.3in]{img/decision_tree.png} \caption{Decision Tree}
     \label{fig:decision_tree} \end{figure}
@@ -199,7 +200,7 @@ We have these following assumptions:
 \begin{itemize}
 \item  There is no any other data providers provide the same product in Data Marketplace. Therefore, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
 \item  More than 51\% of data buyers are among complete information exchange state. In other words, once one of them launches voting for stopping buying data and refunding, they would succeed in refund voting.
-\item  One of the data buyers who has complete imformation exchange with other 51\% buyers will definitely find out the wrong or fake data provided by data provider is wrong.
+\item  One of the data buyers who has complete imformation exchange with other 51\% buyers will definitely find out if wrong data or low accuracy data are delivered to data buyers.
 \end{itemize}
 
 Based on the description above, the discount sum of payoff for our repeated game is 
@@ -216,7 +217,7 @@ Based on the description above, the discount sum of payoff for our repeated game
 \end{itemize}
 
 
-Al-Fagih et al. presented\cite{DataPrice} $P_s$ is a sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game with differential easily.
+Al-Fagih et al. presented\cite{DataPrice} $P_s$ is a sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game easily.
 
 \section{Conclusion}
 
