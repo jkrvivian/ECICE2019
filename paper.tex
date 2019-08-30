@@ -24,6 +24,7 @@
 %%% Fill in school here
 \IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Information Engineering National Cheng Kung University} \\
 \IEEEauthorblockA{\IEEEauthorrefmark{3}Department of Computer Science and Information Engineering National Taiwan University} \\
+\IEEEauthorblockA{\IEEEauthorrefmark{4}BiiLabs, Co., Ltd.} \\
 
 %%% Fill in address here
 \IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}No.1, University Road, \IEEEauthorrefmark{3}No.1, Sec. 4, Roosevelt Road} \\
@@ -185,25 +186,26 @@ To refund or withdraw subscription fee from the smart contract, data provider, b
 
 
 \subsection{Game Theory Evaluation}
-
+\subsubsection{Repeated Game}
 Repeated game consists of serveral repetitions of some stage games. In each stage game, the action player takes will effect the actions that players are going to take in the future stages. Repeated game can be illustrated with a decision tree and described their payoff with discounted sum of payoff. Discounted sum of payoff can capture the idea that what the players truly pursue is the sum of payoff in all stages and payoff in different stages may varify.
 
-We use a repeated game to express the scenario of our Data Marketplace. Figure.\ref{fig:decision_tree} shows the decision tree to depict the the repeated game we used. Each level in this decision tree represents each round of data transmission from data provider to data buyers, and the data buyers would pay subscription fee, $P_s$, in total to buy the data.
+\subsubsection{Model Description}
+We use a repeated game to express the scenario of our Data Marketplace. Figure.\ref{fig:decision_tree} shows the decision tree to depict the the repeated game we used. Each level in this decision tree represents each round of data transmission from data provider to data buyers, and the data buyers would pay subscription fee, $p_s$, each person. The sum of all the subscription fee pays to data provider is denoted as $P_s$.
 
 Refund is a major issue in our research. However, we don't have to take refund as a factor in our repeated game, since in our decentralized data marketplace we use smart contract to store the subscription fee which will be paid to buy the future data. The subscription fee will be paid as data provider provides new data. In other words, data provide doesn't need to take any procedure to transer subscription fee from his/her own account to data buyers' account. For the same reason, data provider has no responsibility on the refunding processing fee charged by the smart contract as well.
 
 \begin{figure} \centering \includegraphics[width=3.3in]{img/decision_tree.png} \caption{Decision Tree}
     \label{fig:decision_tree} \end{figure}
-For every $n$ round, the data provider would cost $C_{maintain}$ to maintain or enhance the sensors that data provider owns. We call this as a maintain period. Moreover, the value of data and the cost of maintenance will decrease as time pass, so we introduce a discount factor $\beta$ to depict this phenomena.
+For every $n$ round, the data provider would cost $C_{maintain}$ to maintain or enhance the sensors that data provider owns. We call this as a maintain period. Moreover, the value of data and the cost of maintenance will decrease as time pass, so we introduce a discounted factor $\beta$ to depict this phenomena.
 
 We have these following assumptions:
 \begin{itemize}
 \item  There is no any other data providers provide the same product in Data Marketplace. Therefore, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
 \item  More than 51\% of data buyers are among complete information exchange state. In other words, once one of them launches voting for stopping buying data and refunding, they would succeed in refund voting.
-\item  One of the data buyers who has complete imformation exchange with other 51\% buyers will definitely find out if wrong data or low accuracy data are delivered to data buyers.
+\item  One of the data buyers who has complete information exchange with other 51\% buyers has the ability to examine the data quality. If unacceptably low accuracy data are delivered to data buyers, this examiner will spread this information out.
 \end{itemize}
 
-Based on the description above, the discount sum of payoff for our repeated game is 
+Based on the description above, the discounted sum of payoff for our repeated game is 
 \begin{equation} \label{payoff}
 \sum_{i=0}^{m}{\beta^{in}\cdot [(\sum_{j=0}^{n} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
@@ -215,7 +217,6 @@ Based on the description above, the discount sum of payoff for our repeated game
 \item $n$ is how many round for one maintenance period.
 \item $m$ is how many maintenance periods have been experienced in this repeated game.
 \end{itemize}
-
 
 Al-Fagih et al. presented\cite{DataPrice} $P_s$ is a sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game easily.
 
