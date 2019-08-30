@@ -108,7 +108,7 @@ Blind signature\cite{blindSig} is a form of digital signature where the message 
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
 
 \subsection{Participants Registration}
-At the beginning, the registrar creates a Registration Contract (Figure \ref{fig:registration_contract}), which maintains all participants' information, including their DID (Decentralized Identifiers) Documents and public keys. Then some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
+At the beginning, the registrar creates a Registration Contract (Figure \ref{fig:registration_contract}), which maintains all participants' information, including their DID (Decentralized Identifiers) Documents and public keys. Only one Registration Contract is needed, and everyone can query the participants' public keys. Then some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
 
 \begin{figure}[h]
 	\centering
@@ -118,7 +118,7 @@ At the beginning, the registrar creates a Registration Contract (Figure \ref{fig
 \end{figure}
 
 \subsection{Launching and Searching Products}
-To sell the sensing data, a data provider has to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract (Figure \ref{fig:product_contract}).
+To sell the sensing data, a data provider has to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract (Figure \ref{fig:product_contract}). Each product has a Product Contract to record the trading process.
 
 \begin{figure}[h]
 \centering
