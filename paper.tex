@@ -45,7 +45,7 @@
 \begin{abstract}
 Data as a Service (DaaS) offers consumption data, geographic information, etc., for a number of years and have come to form a multi-billion dollar industry. But IoT cannot be considered a mere extension of DaaS. Transacting IoT data must be different in many respects in order to build much-needed trust in IoT-enabled Data Marketplaces, trust that will be key to their sustainability. Data generated internally to an organization is usually not enough to remain competitive, enhance customer experience, and improve strategic decision-making.
 
-In this paper, we propose a novel approach to construct IoT-enabled data marketplace by means of decentralized and trustless architecture, putting not merely the trading records but also the transaction process on the distributed ledgers. This way can efficiently enhance the degree of transparency, since all interactions with smart contracts will be written on-chain. In other words, users transport the encrypted data audited by smart contracts for storage via an end-to-end encrypted message channel which allows emitting and accessing trusted data stream over the distributed ledger regardless of the size or cost of device, simultaneously making a verifiable Auth-compliant request to the platform in claim of "being tradable." Later, the verified data will enter data marketplace to be traded. Furthermore, the platform will complete matching, trading and refunding without human intervention in the whole process, and also protect the rights of data providers and consumers through trading policy written on smart contract, and finally apply evolutionary game theory to machine economy.
+In this paper, we propose a novel approach to construct IoT-enabled data marketplace by means of decentralized and trustless architecture, putting not merely the trading records but also the transaction process on the distributed ledgers. This way can efficiently enhance the degree of transparency, since all interactions with smart contracts will be written on-chain. In other words, users transport the encrypted data audited by smart contracts for storage via an end-to-end encrypted message channel which allows emitting and accessing trusted data stream over the distributed ledger regardless of the size or cost of device, simultaneously making a verifiable Auth-compliant request to the platform. Later, the verified data will enter data marketplace to be traded. Furthermore, the platform will complete matching, trading and refunding without human intervention in the whole process, and also protect the rights of data providers and consumers through trading policy written on smart contract, and finally apply evolutionary game theory to machine economy.
 \end{abstract}
 
 % 3 - 4 keywords
@@ -54,6 +54,28 @@ streaming data, crowd sensing, data marketplace, decentralization
 \end{IEEEkeywords}
 
 \section{Introduction}
+The growth of data marketplaces is an inevitable result of the IoT (Internet of Things) revolution. As physical assets such as ships, factories, vehicles, farms or buildings become digital, their digital twins will gradually act as secure data exchanges.\cite{digitaltwin} As data streams surge across silos and carry value across organizations, traditional value chains will transition into a web of value. This paradigm will be more complex to administer, forcing business to rethink their competitive play as part of these ecosystems. Data marketplaces will emerge as a means to exchange data, monetize data streams and provide the basis of new business models. We refer to this new wave of value creation, for the Internet of Everything, as the "Economy of Things." There are three main barriers to achieving data marketplace:
+\begin{enumerate}
+  \item Data owners do not have much control over their data and their data are locked in silos managed by products and services companies.
+  \item Data owners only have access to their own data which has little value when it comes to knowledge discovery.
+  \item Data owners do not know how to discover knowledge from raw data.
+\end{enumerate}
+
+To overcome these barriers, we implement IoT-enabled Data Marketplace and sensor data submission functionalities are intended to be very lightweight, capable of running on embedded devices. They will only need to perform Tangle operations (e.g., producing and consuming secure channels) and communicate with decentralized facilities, which do not rely on single-source network infrastructure. This proposed reference architecture includes functions that could be mapped to different stakeholders, and multiple functions can be implemented by the same administrative stakeholder in a given operational deployment.
+\begin{enumerate}
+  \item Data Sellers are entities that deploy an IoT infrastructure, for example smart energy meters. These entities are interested in selling the collected data or subsets of that data.
+  \item Managed Data Lakes would typically store a massive amount of data and metadata to enable data discovery.
+  \item Data Buyers consuming data streams or downloading data sets are interested in the additional value that external data can bring to their internal data.
+\end{enumerate}
+
+Take the use case of Airbox\cite{LASS} for instance. Every household with Airbox can collect air quality records automatically and autonomically, rather than passively accept the outcomes from the centralized authorities. To protect privacy, data should be encrypted before on-chain. As for the data reliability, BiiLabs designs the smart-contract-oriented structure to write down every transaction. At the same time, data on-chain will send a verifiable request to mark itself as "being tradeable." This step enables buyers to review and bargain at will. Last but not least, payments will be stored on the smart contracts until the transactions are confirmed. The whole sequence is illustrated in Figure \ref{fig:airbox}.
+
+\begin{figure}[h]
+        \centering
+	\includegraphics[width=0.5\textwidth]{airbox}
+	\caption{IoT-enabled personal air quality assistant.}
+	\label{fig:airbox}
+\end{figure}
 
 \section{Related Work}
 The economic value of huge amount of data emerges, several researchers have started to explore the design of data marketplace. The Third Party Auditors (TPAs)-based frameworks is far from being satisfactory due to the unstandardize data format and dynamic nature of IoT data. Therefore a decentralized data integrity validation and trading process has been proposed recent years, and blockchain is considered a solution.
