@@ -1,4 +1,4 @@
-\documentclass[journal,a4paper]{IEEEtran}
+\documentclass[journal,10pt,a4paper]{IEEEtran}
 
 \usepackage[english]{babel}
 \usepackage{url}
@@ -11,35 +11,47 @@
 \usepackage{amsmath}
 \graphicspath{ {./images/} }
 
-
 \begin{document}
-\title{Decentralized Data Marketplace to Enable Trusted Machine Economy}
+%
+\title{\Large\textbf{Decentralized Data Marketplace to Enable Trusted Machine Economy}}
+%
 \author{
-\IEEEauthorblockN{Zan-Jun Wang\IEEEauthorrefmark{3}, Ching-Hua Lin\IEEEauthorrefmark{2}, Yang-Hao Yuan\IEEEauthorrefmark{4}, Ching-Chun (Jim) Huang\IEEEauthorrefmark{1}}\\
+%%% Fill in name here
+%\IEEEauthorblockN{
+\large Zan-Jun Wang\IEEEauthorrefmark{3}, Ching-Hua Lin\IEEEauthorrefmark{2}, Yang-Hao Yuan\IEEEauthorrefmark{4}, Ching-Chun (Jim) Huang\IEEEauthorrefmark{1}
+%}\\
 
-\IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Information Engineering, National Cheng Kung University} \\
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Department of Computer Science and Information Engineering, National Taiwan University} \\
-\IEEEauthorblockA{\IEEEauthorrefmark{4}BiiLabs, Co., Ltd.} \\
+%%% Fill in school here
+\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Information Engineering, National Cheng Kung University} \\
+\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{3}Department of Computer Science and Information Engineering, National Taiwan University} \\
+\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{4}BiiLabs, Co., Ltd.} \\
 
-\IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}No.1, University Road, \IEEEauthorrefmark{3}No.1, Sec. 4, Roosevelt Road} \\
+%%% Fill in address here
+\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}No.1, University Road, \IEEEauthorrefmark{3}No.1, Sec. 4, Roosevelt Road} \\
 
-\IEEEauthorblockA{\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Tainan City, Taiwan (R.O.C.), \IEEEauthorrefmark{3}Taipei City, Taiwan (R.O.C.)} \\
+%%% Fill in city and country here
+\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Tainan City, Taiwan (R.O.C.), \IEEEauthorrefmark{3}Taipei City, Taiwan (R.O.C.)} \\
 
-\IEEEauthorblockA{\IEEEauthorrefmark{1}jserv@ccns.ncku.edu.tw, \IEEEauthorrefmark{2}jkrvivian@gmail.com, \IEEEauthorrefmark{3}twzjwang@gmail.com, \IEEEauthorrefmark{4}yanghau@biilabs.io}
+%%% Fill in email here
+\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}jserv@ccns.ncku.edu.tw, \IEEEauthorrefmark{2}jkrvivian@gmail.com, \IEEEauthorrefmark{3}twzjwang@gmail.com, \IEEEauthorrefmark{4}yanghau@biilabs.io}
 }
 
-\maketitle
-\begin{abstract}
+
+%
+
+
+\maketitle              
+% 50-80 words
+\section{\normalsize\textbf{Abstract}}
 Data as a Service (DaaS) offers consumption data, geographic information, etc., for a number of years and has come to form a multi-billion dollar industry. But IoT cannot be considered a mere extension of DaaS. Transacting IoT data must be different in many respects in order to build much-needed trust in IoT-enabled Data Marketplaces, trust that will be key to their sustainability. Data generated internally to an organization is usually not enough to remain competitive, enhance customer experience, and improve strategic decision-making.
 
 In this paper, we propose a novel approach to construct IoT-enabled data marketplace by means of decentralized and trustless architecture, putting not merely the trading records but also the transaction process on the distributed ledgers. This way can efficiently enhance the degree of transparency, since all interactions with smart contracts will be written on-chain. In other words, users transport the encrypted data audited by smart contracts for storage via an end-to-end encrypted message channel which allows emitting and accessing trusted data stream over the distributed ledger regardless of the size or cost of device, simultaneously making a verifiable Auth-compliant request to the platform. Later, the verified data will enter data marketplace to be traded. Furthermore, the platform will complete matching, trading and refunding without human intervention in the whole process, and also protect the rights of data providers and consumers through trading policy written on smart contract, and finally apply evolutionary game theory to machine economy.
-\end{abstract}
 
 \begin{IEEEkeywords}
 streaming data, crowd sensing, data marketplace, decentralization
 \end{IEEEkeywords}
 
-\section{Introduction}
+\section{\normalsize\textbf{Introduction}}
 The growth of data marketplaces is an inevitable result of the IoT (Internet of Things) revolution. As physical assets such as ships, factories, vehicles, farms or buildings become digital, their digital twins will gradually act as secure data exchanges.\cite{digitaltwin}\cite{AutonomousDriving} As data streams surge across silos and carry value across organizations, traditional value chains will transition into a web of value. This paradigm will be more complex to administer, forcing business to rethink their competitive play as part of these ecosystems. Data marketplaces will emerge as a means to exchange data, monetize data streams and provide the basis of new business models. We refer to this new wave of value creation, for the Internet of Everything, as the "Economy of Things." There are three main barriers to achieving data marketplace:
 \begin{enumerate}
   \item Data owners do not have much control over their data and their data are locked in silos managed by products and services companies.
@@ -63,7 +75,7 @@ Take the use case of Airbox\cite{LASS} for instance. Every household with Airbox
 	\label{fig:airbox}
 \end{figure}
 
-\section{Related Work}
+\section{\normalsize\textbf{Related Work}}
 The economic value of huge amount of data emerges, several researchers have started to explore the design of data marketplace. The Third Party Auditors (TPAs)-based frameworks is far from being satisfactory due to the unstandardize data format and dynamic nature of IoT data. Therefore a decentralized data integrity validation and trading process has been proposed recent years, and blockchain is considered a solution.
 
 Data Integrity as a Service (DIaaS) is a blockchain based framework for data integrity proposed by Liu et al.\cite{DIaas} which is a Cloud Server Service (CSS) allows both data provider and consumer to validate data integrity by comparing hashes on Ethereum smart contract and Cloud Server. Moreover, Ethereum smart contract can also realize the purchase agreement, including authoriziation and the penalization. However, the architecture of DIaaS needs highly trust on CSS, if CSS is malicious or crashed, that will cause losses to both providers and consumers. Also, the performance analysis shows that IoT devices have low efficiency interacting with Etheruem due to the time-consuming Proof-of-Work(PoW) process.
@@ -78,8 +90,8 @@ The utility structure of IoT econimic system and game theory models are evaluate
 
 The previous work proposed different solution to specific issues of data marketplace. In this paper, we proposed an  overall design of decentralized data markeplace that takes care of data integrity and trading procedure such as buyout and subsciption on distributed ledger.
 
-\section{System Architecture}
-Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, brokers who interact between data providers and consumers, including data uploading, product metadata generation and trading process, data providers who upload data, and data consumers who search for interested products and issue a new trade in streaming data subscription.
+\section{\normalsize\textbf{System Architecture}}
+Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, brokers who interact between data providers and consumers, including data uploading, product metadata generation and trading process, data providers who upload data, and data consumers who search for interested products and issue a new trade.
 
 \subsection{Participants}
 There are four major roles in the decentralized data marketplace (Figure \ref{fig:system_design}).
@@ -122,7 +134,7 @@ Blind signature\cite{blindSig} is a form of digital signature where the message 
 \subsubsection{IPFS}
 Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to upload the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
 
-\section{Trading Model}
+\section{\normalsize\textbf{Trading Model}}
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
 
 Data provider would receive subscription fee for buying data each time the data is transmitted to consumer; unpaid subscription fee would be stored in smart contract. The consumer will keep buying data from data povider, only when the data sold by the data provider with high enough accuracy, which we called these data as decent data.
@@ -246,14 +258,7 @@ Based on the description above, the discounted sum of payoff for our repeated ga
 
 Al-Fagih et al. presented\cite{DataPrice} $P_s$ is a sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game easily.
 
-\section{Conclusion}
-
-
-
-  
-
-
-
+\section{\normalsize\textbf{Conclusion}}
 
 
 % ---- Bibliography ----
