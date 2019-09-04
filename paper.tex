@@ -14,51 +14,51 @@
 \begin{document}
 \title{\Large\textbf{Decentralized Data Marketplace to Enable Trusted Machine Economy}}
 \author{
-\large Zan-Jun Wang\IEEEauthorrefmark{3}, Ching-Hua (Vivian) Lin\IEEEauthorrefmark{2}, Yang-Hao Yuan\IEEEauthorrefmark{4}, Ching-Chun (Jim) Huang\IEEEauthorrefmark{1}
+    \large Zan-Jun Wang\IEEEauthorrefmark{3}, Ching-Hua (Vivian) Lin\IEEEauthorrefmark{2}, Yang-Hao Yuan\IEEEauthorrefmark{4}, Ching-Chun (Jim) Huang\IEEEauthorrefmark{1}
 
-\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Information Engineering, National Cheng Kung University} \\
-\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{3}Department of Computer Science and Information Engineering, National Taiwan University} \\
-\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{4}BiiLabs, Co., Ltd.} \\
+    \IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Information Engineering, National Cheng Kung University} \\
+    \IEEEauthorblockA{\normalsize\IEEEauthorrefmark{3}Department of Computer Science and Information Engineering, National Taiwan University} \\
+    \IEEEauthorblockA{\normalsize\IEEEauthorrefmark{4}BiiLabs, Co., Ltd.} \\
 
-\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}No.1, University Road, \IEEEauthorrefmark{3}No.1, Sec. 4, Roosevelt Road} \\
+    \IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}No.1, University Road, \IEEEauthorrefmark{3}No.1, Sec. 4, Roosevelt Road} \\
 
-\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Tainan City, Taiwan (R.O.C.), \IEEEauthorrefmark{3}Taipei City, Taiwan (R.O.C.)} \\
+    \IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Tainan City, Taiwan (R.O.C.), \IEEEauthorrefmark{3}Taipei City, Taiwan (R.O.C.)} \\
 
-\IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}jserv@ccns.ncku.edu.tw, \IEEEauthorrefmark{2}jkrvivian@gmail.com, \IEEEauthorrefmark{3}twzjwang@gmail.com, \IEEEauthorrefmark{4}yanghau@biilabs.io}
+    \IEEEauthorblockA{\normalsize\IEEEauthorrefmark{1}jserv@ccns.ncku.edu.tw, \IEEEauthorrefmark{2}jkrvivian@gmail.com, \IEEEauthorrefmark{3}twzjwang@gmail.com, \IEEEauthorrefmark{4}yanghau@biilabs.io}
 }
 
-\maketitle              
+\maketitle
 \section{\normalsize\textbf{Abstract}}
 Data as a Service (DaaS) offers consumption data, geographic information, etc., for a number of years and has come to form a multi-billion dollar industry. But IoT cannot be considered a mere extension of DaaS. Transacting IoT data must be different in many respects in order to build much-needed trust in IoT-enabled Data Marketplaces, trust that will be key to their sustainability. Data generated internally to an organization is usually not enough to remain competitive, enhance customer experience, and improve strategic decision-making.
 
 In this paper, we propose a novel approach to construct IoT-enabled data marketplace by means of decentralized and trustless architecture, putting not merely the trading records but also the transaction process on the distributed ledgers. This way can efficiently enhance the degree of transparency, since all interactions with smart contracts will be written on-chain. In other words, users transport the encrypted data audited by smart contracts for storage via an end-to-end encrypted message channel which allows emitting and accessing trusted data stream over the distributed ledger regardless of the size or cost of device, simultaneously making a verifiable Auth-compliant request to the platform. Later, the verified data will enter data marketplace to be traded. Furthermore, the platform will complete matching, trading and refunding without human intervention in the whole process, and also protect the rights of data providers and consumers through trading policy written on smart contract, and finally apply evolutionary game theory to machine economy.
 
 \begin{IEEEkeywords}
-streaming data, crowd sensing, data marketplace, decentralization
+    streaming data, crowd sensing, data marketplace, decentralization
 \end{IEEEkeywords}
 
 \section{\normalsize\textbf{Introduction}}
 The growth of data marketplaces is an inevitable result of the IoT (Internet of Things) revolution. As physical assets such as ships, factories, vehicles, farms or buildings become digital, their digital twins will gradually act as secure data exchanges.\cite{digitaltwin}\cite{AutonomousDriving} As data streams surge across silos and carry value across organizations, traditional value chains will transition into a web of value. This paradigm will be more complex to administer, forcing business to rethink their competitive play as part of these ecosystems. Data marketplaces will emerge as a means to exchange data, monetize data streams and provide the basis of new business models. We refer to this new wave of value creation, for the Internet of Everything, as the "Economy of Things." There are three main barriers to achieving data marketplace:
 \begin{enumerate}
-  \item Data owners do not have much control over their data and their data are locked in silos managed by products and services companies.
-  \item Data owners only have access to their own data which has little value when it comes to knowledge discovery.
-  \item Data owners do not know how to discover knowledge from raw data.
+    \item Data owners do not have much control over their data and their data are locked in silos managed by products and services companies.
+    \item Data owners only have access to their own data which has little value when it comes to knowledge discovery.
+    \item Data owners do not know how to discover knowledge from raw data.
 \end{enumerate}
 
 To overcome these barriers, we implement IoT-enabled Data Marketplace and sensor data submission functionalities are intended to be very lightweight, capable of running on embedded devices. They will only need to perform Tangle operations (e.g., producing and consuming secure channels) and communicate with decentralized facilities, which do not rely on single-source network infrastructure. This proposed reference architecture includes functions that could be mapped to different stakeholders, and multiple functions can be implemented by the same administrative stakeholder in a given operational deployment.
 \begin{enumerate}
-  \item Data Sellers are entities that deploy an IoT infrastructure, for example smart energy meters. These entities are interested in selling the collected data or subsets of that data.
-  \item Managed Data Lakes would typically store a massive amount of data and metadata to enable data discovery.
-  \item Data Buyers consuming data streams or downloading data sets are interested in the additional value that external data can bring to their internal data.
+    \item Data Sellers are entities that deploy an IoT infrastructure, for example smart energy meters. These entities are interested in selling the collected data or subsets of that data.
+    \item Managed Data Lakes would typically store a massive amount of data and metadata to enable data discovery.
+    \item Data Buyers consuming data streams or downloading data sets are interested in the additional value that external data can bring to their internal data.
 \end{enumerate}
 
 Take the use case of Airbox\cite{LASS} for instance. Every household with Airbox can collect air quality records automatically and autonomically, rather than passively accept the outcomes from the centralized authorities. To protect privacy, data should be encrypted before on-chain. As for the data reliability, we extended the backbone design of Airbox to interoperate the smart-contract-oriented structure to write down every transaction. At the same time, data on-chain will send a verifiable request to mark itself as "being tradeable." This step enables buyers to review and bargain at will. Last but not least, payments will be stored on the smart contracts until the transactions are confirmed. The whole sequence is illustrated in Figure \ref{fig:airbox}.
 
 \begin{figure}[h]
-        \centering
-	\includegraphics[width=0.5\textwidth]{airbox}
-	\caption{IoT-enabled personal air quality assistant.}
-	\label{fig:airbox}
+    \centering
+    \includegraphics[width=0.5\textwidth]{airbox}
+    \caption{IoT-enabled personal air quality assistant.}
+    \label{fig:airbox}
 \end{figure}
 
 \section{\normalsize\textbf{Related Work}}
@@ -66,11 +66,11 @@ The economic value of huge amount of data emerges, several researchers have star
 
 Data Integrity as a Service (DIaaS) is a blockchain based framework for data integrity proposed by Liu et al.\cite{DIaas} which is a Cloud Server Service (CSS) allows both data provider and consumer to validate data integrity by comparing hashes on Ethereum smart contract and Cloud Server. Moreover, Ethereum smart contract can also realize the purchase agreement, including authoriziation and the penalization. However, the architecture of DIaaS needs highly trust on CSS, if CSS is malicious or crashed, that will cause losses to both providers and consumers. Also, the performance analysis shows that IoT devices have low efficiency interacting with Etheruem due to the time-consuming Proof-of-Work(PoW) process.
 
-By solving the inefficiency of the Blockchain, \textbf{IOTA}\cite{IOTAwhitepaper} is a cryptocurrency for the IoT industry based on a revolutionary distributed ledger technology, the \textbf{Tangle}, which enables zero-transaction. On top of that, \textbf{Masked Authenticated Messaging(MAM)}\cite{MAM}, a second layer data communication protocol which allows to emit and access an encrypted data stream over the Tangle where privacy and integrity meet. 
+By solving the inefficiency of the Blockchain, \textbf{IOTA}\cite{IOTAwhitepaper} is a cryptocurrency for the IoT industry based on a revolutionary distributed ledger technology, the \textbf{Tangle}, which enables zero-transaction. On top of that, \textbf{Masked Authenticated Messaging(MAM)}\cite{MAM}, a second layer data communication protocol which allows to emit and access an encrypted data stream over the Tangle where privacy and integrity meet.
 
 On the basis of the Tangle and MAM, IOTA foundation proposed a decentralized Data Marketplace\cite{IOTADataMarket} which is suitable for IoT streaming data that not only allows data providers to put data on Tangle without any trusted cloud services, but also allow providers and consumers to trade on Tangle and protect privacy and assure data integrity from source with MAM. Nevertheless, the platform design is centralized, new devices require manual approval from IOTA team to be visible in the marketplace. Also, interacting with Tangle is still the bottleneck for low-level devices especially in an unstable network or electricity environment.
 
-A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a highly resourced and trustless device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.  
+A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a highly resourced and trustless device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.
 
 The utility structure of IoT econimic system and game theory models are evaluated by Dusit Niyato et al.\cite{UtilityStruct}. Game theory provides a mathematical solution to proof the existence of Nash Equilibrium in IoT economy. The authors ensures the sustainability of IoT economy by game theory. Data marketplace organizers can apply numerical analysis on game theory, which would help them to find out their optimal pofit. However, few things didn't be mentioned in their work including refund and subscription economy.
 
@@ -95,17 +95,17 @@ Consumers aspire to obtain streaming data to promote the value of their service.
 Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the data provider requests a broker to create a new MAM channel, a new Product Contract, which specifies details about products, and upload this product to a decentralized storage system\cite{IPFS}. Also the broker certifies the session key which is used for symmetric encryption for streaming data encryption and decryption. Then the broker provides the matching service for data provider’s products and consumer’s queries. After that, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each products, brokerage fees will be charged by the broker.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{system_design}
-	\caption{System Design.}
-	\label{fig:system_design}
+    \centering
+    \includegraphics[width=0.4\textwidth]{system_design}
+    \caption{System Design.}
+    \label{fig:system_design}
 \end{figure}
 
 \subsection{Component}
 \subsubsection{Masked Authenticated Messaging}
-IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency for the IoT industry based on a the distributed  ledger consists of a directed acyclic graph(DAG) of individual transactions, \textbf{Tangle}. The innovative consensus algorithm allows people to make \textbf{zero-transactions} that one could store information securely within Tangle transactions. Nevertheless, publishing encrypted streaming data to distributed ledgers is still a challenge, which one need to keep the address and session key per message, otherwise attackers could easily issue spam transactions if publishing with the same address. 
+IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency for the IoT industry based on a the distributed  ledger consists of a directed acyclic graph(DAG) of individual transactions, \textbf{Tangle}. The innovative consensus algorithm allows people to make \textbf{zero-transactions} that one could store information securely within Tangle transactions. Nevertheless, publishing encrypted streaming data to distributed ledgers is still a challenge, which one need to keep the address and session key per message, otherwise attackers could easily issue spam transactions if publishing with the same address.
 
-However, MAM resolves this problem, it is a second layer data communication protocol enables to emit and access an encrypted data stream over Tangle network and ensures data integrity. 
+However, MAM resolves this problem, it is a second layer data communication protocol enables to emit and access an encrypted data stream over Tangle network and ensures data integrity.
 It publishes each message to different addresses that each can be derived from the previous one, this forms a MAM channel. Furthermore, a session key can be provided to control the visibility and access to a MAM channel.
 
 \subsubsection{TangleID}
@@ -131,26 +131,26 @@ Once the accuracy is lower than a certain accuracy, which we called it as unacce
 At the beginning, the registrar creates a Registration Contract (Figure \ref{fig:registration_contract}), which maintains all participants' information, including their DID (Decentralized Identifiers) Documents and public keys. Only one Registration Contract is needed, and everyone can query the participants' public keys. Then some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{registration_contract}
-	\caption{Registration Contract.}
-	\label{fig:registration_contract}
+    \centering
+    \includegraphics[width=0.4\textwidth]{registration_contract}
+    \caption{Registration Contract.}
+    \label{fig:registration_contract}
 \end{figure}
 
 \subsection{Launching and Searching Products}
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{launching_product}
-	\caption{The process of launching a product.}
-	\label{fig:launching_product}
+    \centering
+    \includegraphics[width=0.5\textwidth]{launching_product}
+    \caption{The process of launching a product.}
+    \label{fig:launching_product}
 \end{figure}
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{product_contract}
-	\caption{Product Contract.}
-	\label{fig:product_contract}
+    \centering
+    \includegraphics[width=0.4\textwidth]{product_contract}
+    \caption{Product Contract.}
+    \label{fig:product_contract}
 \end{figure}
 
 To sell the streaming data, a data provider has to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract (Figure \ref{fig:product_contract}). Each product has a Product Contract to record the trading process.
@@ -158,10 +158,10 @@ To sell the streaming data, a data provider has to launch a new product on the d
 Brokers certify session keys as well. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{key_certification}
-	\caption{Session key certification process with blind signature.}
-	\label{fig:key_certification}
+    \centering
+    \includegraphics[width=0.5\textwidth]{key_certification}
+    \caption{Session key certification process with blind signature.}
+    \label{fig:key_certification}
 \end{figure}
 
 The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and start trading with the data provider if the consumer is interested in subscribing the data.
@@ -169,22 +169,22 @@ The contract address and product description will be stored in a file which is u
 \subsection{Trading}
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{trading_product}
-	\caption{The process of the product trading.}
-	\label{fig:trading_product}
+    \centering
+    \includegraphics[width=0.5\textwidth]{trading_product}
+    \caption{The process of the product trading.}
+    \label{fig:trading_product}
 \end{figure}
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{key_exchange}
-	\caption{Session key exchange process between the data provider and consumer.}
-	\label{fig:key_exchange}
+    \centering
+    \includegraphics[width=0.5\textwidth]{key_exchange}
+    \caption{Session key exchange process between the data provider and consumer.}
+    \label{fig:key_exchange}
 \end{figure}
 
 The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who want to subscribe the streaming data pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract. To decrypt the streaming data on the MAM channel, session key $k$ should be exchanged between data provider and consumers as shown in Figure \ref{fig:key_exchange}.
 
-The data provider requests the consumers list maintained by the Product Contract and obtains accounts of each consumer. After that, the data provider can also get public keys of each consumer from the Registration Contract with their accounts. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$. 
+The data provider requests the consumers list maintained by the Product Contract and obtains accounts of each consumer. After that, the data provider can also get public keys of each consumer from the Registration Contract with their accounts. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$.
 
 Consumers can obtain the broker's public key on the Registration Contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is uploaded to the MAM channel, and consumers can download and decrypt it with the session key.
 
@@ -192,15 +192,15 @@ Consumers can obtain the broker's public key on the Registration Contract as wel
 It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumers' right, the subscription fee are not transfered to the data provider until all data is generated and uploaded to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
 
 \begin{equation}
-F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) (1-F_{t})
+    F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) (1-F_{t})
 \end{equation}
 
 \begin{equation}
-F_{Broker}(i) = N price \frac{i-1}{M} F_{b} (1-F_{t})
+    F_{Broker}(i) = N price \frac{i-1}{M} F_{b} (1-F_{t})
 \end{equation}
 
 \begin{equation}
-F_{Consumer}(i) = price \frac{M-i+1}{M} (1-F_{t})
+    F_{Consumer}(i) = price \frac{M-i+1}{M} (1-F_{t})
 \end{equation}
 
 where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ is the brokerage fee(\%), $F_{t}$ is the transaction fee of the smart contract(\%), $N$ is the number of consumers in this contract.
@@ -222,22 +222,22 @@ For every $n$ round, the data provider would cost $C_{maintain}$ to maintain or 
 
 We have these following assumptions:
 \begin{itemize}
-\item  There is no any other data providers provide the same product in Data Marketplace. Therefore, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
-\item  More than 51\% of consumers are among complete information exchange state. In other words, once one of them launches voting for stopping buying data and refunding, they would succeed in refund voting.
-\item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine the data quality. If unacceptably low accuracy data are delivered to consumers, this examiner will spread this information out.
+    \item  There is no any other data providers provide the same product in Data Marketplace. Therefore, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
+    \item  More than 51\% of consumers are among complete information exchange state. In other words, once one of them launches voting for stopping buying data and refunding, they would succeed in refund voting.
+    \item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine the data quality. If unacceptably low accuracy data are delivered to consumers, this examiner will spread this information out.
 \end{itemize}
 
-Based on the description above, the discounted sum of payoff for our repeated game is 
+Based on the description above, the discounted sum of payoff for our repeated game is
 \begin{equation} \label{payoff}
-\sum_{i=0}^{m}{\beta^{in}\cdot [(\sum_{j=0}^{n} \beta^j \cdot P_s) - C_{maintain}]}
+    \sum_{i=0}^{m}{\beta^{in}\cdot [(\sum_{j=0}^{n} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
 
 \begin{itemize}
-\item $P_s$ is the sum of subscription price (fee) for all subscriber.
-\item $C_{maintain}$ is the cost of sensor maintenance in $n$ round.
-\item $\beta$ is discounted factor.
-\item $n$ is how many round for one maintenance period.
-\item $m$ is how many maintenance periods have been experienced in this repeated game.
+    \item $P_s$ is the sum of subscription price (fee) for all subscriber.
+    \item $C_{maintain}$ is the cost of sensor maintenance in $n$ round.
+    \item $\beta$ is discounted factor.
+    \item $n$ is how many round for one maintenance period.
+    \item $m$ is how many maintenance periods have been experienced in this repeated game.
 \end{itemize}
 
 Al-Fagih et al. presented\cite{DataPrice} $P_s$ is a sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game easily.
