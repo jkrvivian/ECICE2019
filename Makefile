@@ -9,5 +9,9 @@ paper.pdf: paper.tex
 edit:
 	texmaker paper.tex &
 
+indent:
+	latexindent -l paper.tex > paper-indent.tex
+	@echo "Check the generated file 'paper-indent.tex' by latexindent"
+
 clean:
 	rm -f *.dvi *.aux *.log *.ps *.pdf *.out paper.bbl paper.blg
