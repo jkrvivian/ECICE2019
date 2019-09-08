@@ -193,6 +193,8 @@ where $price$  is the subscription price, $M$ is the number of expected data sam
 
 To refund or withdraw subscription fee from the smart contract, data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for transaction fee. We assume that only a half of the expected records are uploaded to the MAM channel. For the data provider and broker, they can withdraw a half of total subscription fee from the smart contract and $F_{b}$ \% belongs to the broker while the remaining belongs to the data provider. For consumers, they can get a half refund which should be deducted the transaction fee.
 
+On the other hand, we would consider the situation that one of the consumers requests a refund in our future work. When the consumer is disappointed with the data quality, it may request a refund. Its permit should be cancelled while other consumers are unaffected.
+
 \subsection{Game Theory Evaluation}
 \subsubsection{Repeated Game}
 Repeated game consists of serveral repetitions of some stage games. In each stage game, the action player takes will effect the actions that players are going to take in the future stages. Repeated game can be illustrated with a decision tree and described their payoff with discounted sum of payoff. Discounted sum of payoff can capture the idea that what the players truly pursue is the sum of payoff in all stages and payoff in different stages may varify.
