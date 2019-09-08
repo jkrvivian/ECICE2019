@@ -130,30 +130,16 @@ Once the accuracy is lower than a certain accuracy, which we called it as unacce
 \subsection{Participants Registration}
 At the beginning, the registrar creates a Registration Contract (Figure \ref{fig:registration_contract}), which maintains all participants' information, including their DID (Decentralized Identifiers) Documents and public keys. Only one Registration Contract is needed, and everyone can query the participants' public keys. Then some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{registration_contract}
-    \caption{Registration Contract.}
-    \label{fig:registration_contract}
-\end{figure}
-
 \subsection{Launching and Searching Products}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{launching_product}
-    \caption{The process of launching a product.}
-    \label{fig:launching_product}
-\end{figure}
+To sell the streaming data, a data provider has to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract. Each product has a Product Contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{product_contract}
-    \caption{Product Contract.}
-    \label{fig:product_contract}
+	\centering
+	\includegraphics[width=0.4\textwidth]{launching_product}
+	\caption{The process of launching a product.}
+	\label{fig:launching_product}
 \end{figure}
-
-To sell the streaming data, a data provider has to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract (Figure \ref{fig:product_contract}). Each product has a Product Contract to record the trading process.
 
 Brokers certify session keys as well. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
@@ -170,7 +156,7 @@ The contract address and product description will be stored in a file which is u
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{trading_product}
+    \includegraphics[width=0.4\textwidth]{trading_product}
     \caption{The process of the product trading.}
     \label{fig:trading_product}
 \end{figure}
@@ -182,9 +168,9 @@ The contract address and product description will be stored in a file which is u
     \label{fig:key_exchange}
 \end{figure}
 
-The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who want to subscribe the streaming data pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract. To decrypt the streaming data on the MAM channel, session key $k$ should be exchanged between data provider and consumers as shown in Figure \ref{fig:key_exchange}.
+The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who wants to subscribe the streaming data pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract. Next, session key $k$ should be exchanged between data provider and consumers as shown in Figure \ref{fig:key_exchange}.
 
-The data provider requests the consumers list maintained by the Product Contract and obtains accounts of each consumer. After that, the data provider can also get public keys of each consumer from the Registration Contract with their accounts. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$.
+The data provider can obtain public keys of each consumer from the Registration Contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$.
 
 Consumers can obtain the broker's public key on the Registration Contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is uploaded to the MAM channel, and consumers can download and decrypt it with the session key.
 
