@@ -217,7 +217,7 @@ We have these following assumptions:
 
 Based on the description above, the discounted sum of payoff for our repeated game is
 \begin{equation} \label{payoff}
-    \sum_{i=0}^{m}{\beta^{in}\cdot [(\sum_{j=0}^{n} \beta^j \cdot P_s) - C_{maintain}]}
+    \sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
 
 \begin{itemize}
@@ -228,7 +228,33 @@ Based on the description above, the discounted sum of payoff for our repeated ga
     \item $m$ is how many maintenance periods have been experienced in this repeated game.
 \end{itemize}
 
-Al-Fagih et al. presented\cite{DataPrice} $P_s$ is a sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game easily.
+Al-Fagih et al. presented\cite{DataPrice} $P_s$ is sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game. We will discuss more in the next section.
+
+\subsubsection{Numerical Example}
+To evaluate the behavior of the model we presented, first, we would express the function of $P_s$ and $C_{maintain}$ as function of $P_r$ respectively. Therefore, the sum of subscription fee of all subscriber can be expressed as
+
+\begin{equation} \label{sub_fee}
+P_s = R \frac{e^{a (P_r - b)}}{1 + e^{a (P_r - b)}}
+\end{equation}
+
+where $a$ and $b$ are tuning factors, and $R$ is the maximun data value.
+And we would express the cost of maintenance as
+
+\begin{equation} \label{C_mtn}
+C_{maintain} = ce^{P_r - d}
+\end{equation}
+Where $c$ and $d$ is tuning factor.
+
+Substitute Eq. (\ref{sub_fee}) and Eq. (\ref{C_mtn}) into Eq. (\ref{payoff}). We can derive
+\begin{equation} \label{payoff_Pr}
+\sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot R \frac{e^{a (P_r - b)}}{1 + e^{a (P_r - b)}}) - ce^{P_r - d}]}
+\end{equation}
+
+Let tuning factors $, a = 0.15, b = 50, R = 10000, c = 1, d = 88$, and there is only one maintenance period has happened and one maintenance period consists of 12 rounds which means $m = 1, n = 12$. Based on these parameters, we can plot the payoff function as function of accuracy, $Pr$ which is Figure.\ref{fig:payoff_pic}. The maximun point occurs at $accuracy \approx 92\%$ which we point it out with red dot.
+\begin{figure} \centering \includegraphics[width=3.3in]{payoff_pic} \caption{Payoff Function}
+    \label{fig:payoff_pic} \end{figure}
+
+Figure.\ref{fig:payoff_pic} illustratres the market mechanism of the subscription trading policy we used under the decentralized data marketplace. First, data providers have weak motivation to operate their sensor in low accuracy, since the incentive of low quality data is mush less than moderate quality data. Second the great deficit at high accuracy is mostly drived by the rapid increasing of maintenance cost. Thus, if the maintenance fee to achieve decent data quality is under a fair price range, then data provider will automatically provide data with high enough data quality under our assumptions.
 
 \section{\normalsize\textbf{Conclusion}}
 
