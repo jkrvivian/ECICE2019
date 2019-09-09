@@ -14,4 +14,4 @@ indent:
 	@echo "Check the generated file 'paper-indent.tex' by latexindent"
 
 clean:
-	rm -f *.dvi *.aux *.log *.ps *.pdf *.out paper.bbl paper.blg
+	rm -f *.dvi *.aux *.log *.ps paper.pdf *.out paper.bbl paper.blg
