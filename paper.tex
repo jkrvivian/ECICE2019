@@ -72,9 +72,9 @@ On the basis of the Tangle and MAM, IOTA foundation proposed a decentralized Dat
 
 A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a highly resourced and trustless device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.
 
-The utility structure of IoT econimic system and game theory models are evaluated by Dusit Niyato et al.\cite{UtilityStruct}. Game theory provides a mathematical solution to proof the existence of Nash Equilibrium in IoT economy. The authors ensures the sustainability of IoT economy by game theory. Data marketplace organizers can apply numerical analysis on game theory, which would help them to find out their optimal pofit. However, few things didn't be mentioned in their work including refund and subscription economy.
+The sustainability of IoT economic system is under discussion by Dusit Niyato et al.\cite{UtilityStruct}. They evaluated the utility structure of data trading and presented game theory model with the utility structure which provides a way to find out the Nash Equilibrium. The existence of Nash Equilibrium can help us to determine if the policy of the decentralized data marketplace can ensure a sustainable system. However, few things didn't be mentioned in their work including refund and subscription economy.
 
-The previous work proposed different solution to specific issues of data marketplace. In this paper, we proposed an  overall design of decentralized data markeplace that takes care of data integrity and trading procedure such as buyout and subsciption on distributed ledger.
+The previous work proposed different solution to specific issues of data marketplace. In this paper, we proposed an  overall design of decentralized data marketplace that takes care of data integrity and trading procedure such as buyout and subsciption on distributed ledger.
 
 \section{\normalsize\textbf{System Architecture}}
 Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, brokers who interact between data providers and consumers, including data uploading, product metadata generation and trading process, data providers who upload data, and data consumers who search for interested products and issue a new trade.
@@ -123,9 +123,10 @@ Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for stori
 \section{\normalsize\textbf{Trading Model}}
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
 
-Data provider would receive subscription fee for buying data each time the data is transmitted to consumer; unpaid subscription fee would be stored in smart contract. The consumer will keep buying data from data povider, only when the data sold by the data provider with high enough accuracy, which we called these data as decent data.
-Once the accuracy is lower than a certain accuracy, which we called it as unacceptable data, the consumers would consider this data provider as a low quality data provider, and reject to buy the data from this data provider.
+The consumer will pay for the data, only when the data sold by the data provider with high enough quality/accuracy, which we called these data as decent data.
+Once the accuracy is lower than a certain threshold, which we called these data as unacceptable data, the consumers would consider this data provider as a low quality data provider, and stop buying data from this data provider.
 
+Refund is a major issue in our research. However, we don't have to take refund as a factor in our game theory model, since in our decentralized data marketplace we use smart contract to store the subscription fee which will be paid to buy the future data. The subscription fee will be paid as new data is transmitted to consumers. In other words, data provider doesn't need to take any procedure to transfer subscription fee from his/her own account to consumers' account. For the same reason, data provider has no responsibility on the refunding processing fee charged by the smart contract as well.
 
 \subsection{Participants Registration}
 At the beginning, the registrar creates a Registration Contract (Figure \ref{fig:registration_contract}), which maintains all participants' information, including their DID (Decentralized Identifiers) Documents and public keys. Only one Registration Contract is needed, and everyone can query the participants' public keys. Then some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
@@ -196,13 +197,9 @@ To refund or withdraw subscription fee from the smart contract, data provider, b
 On the other hand, we would consider the situation that one of the consumers requests a refund in our future work. When the consumer is disappointed with the data quality, it may request a refund. Its permit should be cancelled while other consumers are unaffected.
 
 \subsection{Game Theory Evaluation}
-\subsubsection{Repeated Game}
-Repeated game consists of serveral repetitions of some stage games. In each stage game, the action player takes will effect the actions that players are going to take in the future stages. Repeated game can be illustrated with a decision tree and described their payoff with discounted sum of payoff. Discounted sum of payoff can capture the idea that what the players truly pursue is the sum of payoff in all stages and payoff in different stages may varify.
+Game Theory is a methodology to discuss strategic interaciton among game players. If we can ensure Nash Equilibrium of decentralized data marketplace exists at certain acceptable range, then we can promise the sustainability of decentralized data marketplace. Fan Liang et al\cite{SurveyBigDataPricing} listed several different types of game theory models which are applied on data pricing. To describe the scenario more precisely, we decided to use repeated game to build our game theory model which meets the scenario of subscription economy more.
 
-\subsubsection{Model Description}
-We use a repeated game to express the scenario of our Data Marketplace. Figure.\ref{fig:decision_tree} shows the decision tree to depict the the repeated game we used. Each level in this decision tree represents each round of data transmission from data provider to consumers, and the consumers would pay subscription fee, $p_s$, each person. The sum of all the subscription fee pays to data provider is denoted as $P_s$.
-
-Refund is a major issue in our research. However, we don't have to take refund as a factor in our repeated game, since in our decentralized data marketplace we use smart contract to store the subscription fee which will be paid to buy the future data. The subscription fee will be paid as data provider provides new data. In other words, data provide doesn't need to take any procedure to transer subscription fee from his/her own account to consumers' account. For the same reason, data provider has no responsibility on the refunding processing fee charged by the smart contract as well.
+Figure.\ref{fig:decision_tree} shows the decision tree to depict the the repeated game we used. Each level in this decision tree represents each round of data transmission from data provider to consumers, and the consumers would pay subscription fee, $p_s$, each person. The sum of all the subscription fee pays to data provider is denoted as $P_s$.
 
 \begin{figure} \centering \includegraphics[width=3.3in]{decision_tree} \caption{Decision Tree}
     \label{fig:decision_tree} \end{figure}
@@ -213,20 +210,13 @@ We have these following assumptions:
     \item  There is no any other data providers provide the same product in Data Marketplace. Therefore, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
     \item  More than 51\% of consumers are among complete information exchange state. In other words, once one of them launches voting for stopping buying data and refunding, they would succeed in refund voting.
     \item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine the data quality. If unacceptably low accuracy data are delivered to consumers, this examiner will spread this information out.
+    \item  We assume the number of dishonest consumers is really small, so it can be negleted.
 \end{itemize}
 
 Based on the description above, the discounted sum of payoff for our repeated game is
 \begin{equation} \label{payoff}
     \sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
-
-\begin{itemize}
-    \item $P_s$ is the sum of subscription price (fee) for all subscriber.
-    \item $C_{maintain}$ is the cost of sensor maintenance in $n$ round.
-    \item $\beta$ is discounted factor.
-    \item $n$ is how many round for one maintenance period.
-    \item $m$ is how many maintenance periods have been experienced in this repeated game.
-\end{itemize}
 
 Al-Fagih et al. presented\cite{DataPrice} $P_s$ is sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game. We will discuss more in the next section.
 
