@@ -83,16 +83,16 @@ Our proposed data marketplace framework is a 3-tier decentralized architecture w
 There are four major roles in the decentralized data marketplace (Figure \ref{fig:system_design}).
 
 \subsubsection{Registrar}
-Registrar is responsible for creating a Registration Contract, which maintains a lookup table of participants, and adding new data providers, consumers and brokers to the decentralized data marketplace.
+The registrar is responsible for creating a Registration Contract, which maintains a lookup table of participants, and has the authority to control the participant lists of the decentralized data marketplace.
 
 \subsubsection{Data Provider}
-Data providers, who generate and preserve streaming data, are willing to sell streaming data to consumers. They decide the subscription period, subscription price, data type, sampling frequency. Afterward, they can launch the product on the decentralized data marketplace. Next, they collect raw data and send to the broker who assists in uploading data to the network. An MAM channel\cite{MAM} is used to store encrypted data stream. They receive subscription fees from consumers, which can be used to improve the quantity and accuracy of their device or service.
+Data providers, who generate and preserve streaming data, are willing to sell streaming data to consumers. They can launch the product on the decentralized data marketplace and receive subscription fees from consumers, which can be used to improve the quantity and accuracy of their device or service.
 
 \subsubsection{Consumer}
-Consumers aspire to obtain streaming data to promote the value of their service. However, it is a big challenge for most consumers to collect the desired data by themselves. So they look forward to purchasing the streaming data from data providers. They search products on the marketplace and pay for subscription fee. While the payment is received, the smart contract adds the consumer to the consumers lists of that product automatically. The session key would be exchanged and consumers can decrypt the ciphertext on the MAM channel, which contains streaming data.
+Consumers aspire to obtain streaming data to promote the value of their service. However, it is a big challenge for most consumers to collect the desired data by themselves. So they look forward to purchasing the streaming data from data providers.
 
 \subsubsection{Broker}
-Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the data provider requests a broker to create a new MAM channel, a new Product Contract, which specifies details about products, and upload this product to a decentralized storage system\cite{IPFS}. Also the broker certifies the session key which is used for symmetric encryption for streaming data encryption and decryption. Then the broker provides the matching service for data provider’s products and consumer’s queries. After that, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each products, brokerage fees will be charged by the broker.
+Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each products, brokerage fees will be charged by the broker.
 
 \begin{figure}[h]
     \centering
