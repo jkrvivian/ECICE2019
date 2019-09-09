@@ -83,16 +83,16 @@ Our proposed data marketplace framework is a 3-tier decentralized architecture w
 There are four major roles in the decentralized data marketplace (Figure \ref{fig:system_design}).
 
 \subsubsection{Registrar}
-The registrar is responsible for creating a Registration Contract, which maintains a lookup table of participants, and has the authority to control the participant lists of the decentralized data marketplace.
+The registrar is responsible for creating a Registration Contract, which maintains a lookup table of participants, and has the authority to control the participant lists of the decentralized data marketplace. 
 
 \subsubsection{Data Provider}
-Data providers, who generate and preserve streaming data, are willing to sell streaming data to consumers. They can launch the product on the decentralized data marketplace and receive subscription fees from consumers, which can be used to improve the quantity and accuracy of their device or service.
+Data providers, who generate and preserve streaming data, are willing to sell streaming data to consumers and receive subscription fees from consumers, which can be used to improve the quantity and accuracy of their device or service.
 
 \subsubsection{Consumer}
 Consumers aspire to obtain streaming data to promote the value of their service. However, it is a big challenge for most consumers to collect the desired data by themselves. So they look forward to purchasing the streaming data from data providers.
 
 \subsubsection{Broker}
-Brokers represent data providers and consumers to do computing tasks in the DLT (Distributed Ledger Technology) since brokers are expected to have high computing power. Once a data provider wants to launch a new product, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each products, brokerage fees will be charged by the broker.
+Brokers represent data providers and consumers to do computing tasks since brokers are expected to have higher resource. Some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each product, brokerage fees will be charged by the broker.
 
 \begin{figure}[h]
     \centering
@@ -115,7 +115,7 @@ TangleID\cite{TangleID} is a self-soverign identity system based on IOTA that do
 Smart contract\cite{smartContract} is a protocol for formulating agreement on blockchain that provides verification and execution of the contract. The code in the smart contract could interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are transparent and with enforcement. The appearance of smart contracts makes trading more flexible, and achieves more complex trading patterns in reality.
 
 \subsubsection{Blind Signature}
-Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it.
+ It is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it.
 
 \subsubsection{IPFS}
 Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to upload the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
@@ -129,10 +129,9 @@ Once the accuracy is lower than a certain threshold, which we called these data 
 Refund is a major issue in our research. However, we don't have to take refund as a factor in our game theory model, since in our decentralized data marketplace we use smart contract to store the subscription fee which will be paid to buy the future data. The subscription fee will be paid as new data is transmitted to consumers. In other words, data provider doesn't need to take any procedure to transfer subscription fee from his/her own account to consumers' account. For the same reason, data provider has no responsibility on the refunding processing fee charged by the smart contract as well.
 
 \subsection{Participants Registration}
-At the beginning, the registrar creates a Registration Contract, which maintains all participants' information, including their DID (Decentralized Identifiers) Documents and public keys. Only one Registration Contract is needed, and everyone can query the participants' public keys. Then some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Anyone who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
+At the beginning, the registrar creates a Registration Contract, which maintains all participants' information, including their DID documents and public keys. Everyone can query participants' public keys. Those who would like to sell or purchase data may register to become the data providers or consumers. The registrar has the authority to agree with applications. After that, their identities are available in the Registration Contract and launching and trading processes can be started.
 
 \subsection{Launching and Searching Products}
-
 To sell the streaming data, a data provider has to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract. Each product has a Product Contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
 
 \begin{figure}[h]
@@ -142,7 +141,7 @@ To sell the streaming data, a data provider has to launch a new product on the d
 	\label{fig:launching_product}
 \end{figure}
 
-Brokers certify session keys as well. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
+Brokers certify session keys as well. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
 \begin{figure}[h]
     \centering
@@ -154,29 +153,28 @@ Brokers certify session keys as well. Only one session key can be signed in each
 The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and start trading with the data provider if the consumer is interested in subscribing the data.
 
 \subsection{Trading}
+The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who wants to subscribe the streaming data that is generated in the future pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract. 
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{trading_product}
-    \caption{The process of the product trading.}
-    \label{fig:trading_product}
+	\centering
+	\includegraphics[width=0.4\textwidth]{trading_product}
+	\caption{The process of the product trading.}
+	\label{fig:trading_product}
 \end{figure}
+
+Next, session key $k$ should be exchanged between data provider and consumers as shown in Figure \ref{fig:key_exchange}. The data provider can obtain public keys of each consumer from the Registration Contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{key_exchange}
-    \caption{Session key exchange process between the data provider and consumer.}
-    \label{fig:key_exchange}
+	\centering
+	\includegraphics[width=0.5\textwidth]{key_exchange}
+	\caption{Session key exchange process between the data provider and consumer.}
+	\label{fig:key_exchange}
 \end{figure}
 
-The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who wants to subscribe the streaming data pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract. Next, session key $k$ should be exchanged between data provider and consumers as shown in Figure \ref{fig:key_exchange}.
-
-The data provider can obtain public keys of each consumer from the Registration Contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$.
-
-Consumers can obtain the broker's public key on the Registration Contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is uploaded to the MAM channel, and consumers can download and decrypt it with the session key.
+Consumers can obtain the broker's public key on the Registration Contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
 
 \subsection{Refunding}
-It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumers' right, the subscription fee are not transfered to the data provider until all data is generated and uploaded to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
+It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transfered to the data provider until data is generated and uploaded to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
 
 \begin{equation}
     F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) (1-F_{t})
