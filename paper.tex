@@ -29,9 +29,9 @@
 
 \maketitle
 \section*{\normalsize\textbf{Abstract}}
-Data as a Service (DaaS) offers consumption data, geographic information, etc., for a number of years and has come to form a multi-billion dollar industry. But IoT cannot be considered a mere extension of DaaS. Transacting IoT data must be different in many respects in order to build much-needed trust in IoT-enabled Data Marketplaces, trust that will be key to their sustainability. Data generated internally to an organization is usually not enough to remain competitive, enhance customer experience, and improve strategic decision-making.
+Data as a Service (DaaS) has been offering consumption data, geographic information, etc., for a number of years and has evolved into a multi-billion dollar industry. But IoT cannot be considered a mere extension of DaaS. Transacting IoT data must be different in many respects in order to build much-needed trust in IoT-enabled data marketplaces, trust that will be key to their sustainability. Data generated internally to an organization is usually not enough to remain competitive, enhance customer experience, and improve strategic decision-making.
 
-In this paper, we propose a novel approach to construct IoT-enabled data marketplace by means of decentralized and trustless architecture, putting not merely the trading records but also the transaction process on the distributed ledgers. This way can efficiently enhance the degree of transparency, since all interactions with smart contracts will be written on-chain. In other words, users transport the encrypted data audited by smart contracts for storage via an end-to-end encrypted message channel which allows emitting and accessing trusted data stream over the distributed ledger regardless of the size or cost of device, simultaneously making a verifiable Auth-compliant request to the platform. Later, the verified data will enter data marketplace to be traded. Furthermore, the platform will complete matching, trading and refunding without human intervention in the whole process, and also protect the rights of data providers and consumers through trading policy written on smart contract, and finally apply evolutionary game theory to machine economy.
+In this paper, we propose a novel approach to construct IoT-enabled data marketplace by means of decentralized and trustless architecture, posting the trade records but also including the transaction process on the distributed ledgers. This way can efficiently enhance the degree of transparency, since all interactions with smart contracts will be written on-chain. In other words, users transport the encrypted data audited by smart contracts for storage via an end-to-end encrypted message channel which allows emitting and accessing trusted data stream over the distributed ledger regardless of the size or cost of the device, simultaneously making a verifiable Auth-compliant request to the platform. Later, the verified data will enter the data marketplace to be traded. Furthermore, the platform will complete matching, trading and refunding process without the human intervention which also protects the rights of data providers and consumers through a trading policy written on the smart contract, and finally apply evolutionary game theory to the machine economy.
 
 \begin{IEEEkeywords}
     streaming data, crowd sensing, data marketplace, decentralization
@@ -62,19 +62,19 @@ Take the use case of Airbox\cite{LASS} for instance. Every household with Airbox
 \end{figure}
 
 \section{\normalsize\textbf{Related Work}}
-The economic value of huge amount of data emerges, several researchers have started to explore the design of data marketplace. The Third Party Auditors (TPAs)-based frameworks is far from being satisfactory due to the unstandardize data format and dynamic nature of IoT data. Therefore a decentralized data integrity validation and trading process has been proposed recent years, and blockchain is considered a solution.
+The economic value of huge amount of data emerges, several researchers have started to explore the design of data marketplace. The Third Party Auditors (TPAs)-based frameworks\cite{TPA} is far from being satisfactory due to the unstandardize data format and dynamic nature of IoT data. Therefore a decentralized data integrity validation and trading process has been proposed recent years, and blockchain is considered a solution.
 
-Data Integrity as a Service (DIaaS) is a blockchain based framework for data integrity proposed by Liu et al.\cite{DIaas} which is a Cloud Server Service (CSS) allows both data provider and consumer to validate data integrity by comparing hashes on Ethereum smart contract and Cloud Server. Moreover, Ethereum smart contract can also realize the purchase agreement, including authoriziation and the penalization. However, the architecture of DIaaS needs highly trust on CSS, if CSS is malicious or crashed, that will cause losses to both providers and consumers. Also, the performance analysis shows that IoT devices have low efficiency interacting with Etheruem due to the time-consuming Proof-of-Work(PoW) process.
+Data Integrity as a Service (DIaaS) is a blockchain based framework for data integrity proposed by Liu et al.\cite{DIaas} which is a Cloud Server Service (CSS) allows both data provider and consumer to validate data integrity by comparing hashes on Ethereum smart contract\cite{smartContract} and Cloud Server. Moreover, Ethereum smart contract can also realize the purchase agreement, including authoriziation and the penalization. However, the architecture of DIaaS needs highly trust on CSS, if CSS is malicious or crashed, that will cause losses to both providers and consumers. Also, the performance analysis shows that IoT devices have low efficiency interacting with Ethereum due to the time-consuming Proof-of-Work(PoW) process.
 
 By solving the inefficiency of the Blockchain, \textbf{IOTA}\cite{IOTAwhitepaper} is a cryptocurrency for the IoT industry based on a revolutionary distributed ledger technology, the \textbf{Tangle}, which enables zero-transaction. On top of that, \textbf{Masked Authenticated Messaging(MAM)}\cite{MAM}, a second layer data communication protocol which allows to emit and access an encrypted data stream over the Tangle where privacy and integrity meet.
 
-On the basis of the Tangle and MAM, IOTA foundation proposed a decentralized Data Marketplace\cite{IOTADataMarket} which is suitable for IoT streaming data that not only allows data providers to put data on Tangle without any trusted cloud services, but also allow providers and consumers to trade on Tangle and protect privacy and assure data integrity from source with MAM. Nevertheless, the platform design is centralized, new devices require manual approval from IOTA team to be visible in the marketplace. Also, interacting with Tangle is still the bottleneck for low-level devices especially in an unstable network or electricity environment.
+On the basis of the Tangle and MAM, IOTA foundation launched a Data Marketplace\cite{IOTADataMarket} which is suitable for IoT streaming data that not only allows data providers to put data on Tangle without any trusted cloud services, but also allow providers and consumers to trade on Tangle and protect privacy and assure data integrity from source with MAM. Nevertheless, the platform design is centralized, new devices require manual approval from IOTA foundation to be visible in the marketplace. Also, interacting with Tangle is still the bottleneck for low-level devices especially in an unstable network or electricity environment.
 
-A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a highly resourced and trustless device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.
+A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a trustless and highly resourced device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.  
 
 The sustainability of IoT economic system is under discussion by Dusit Niyato et al.\cite{UtilityStruct}. They evaluated the utility structure of data trading and presented game theory model with the utility structure which provides a way to find out the Nash Equilibrium. The existence of Nash Equilibrium can help us to determine if the policy of the decentralized data marketplace can ensure a sustainable system. However, few things didn't be mentioned in their work including refund and subscription economy.
 
-The previous work proposed different solution to specific issues of data marketplace. In this paper, we proposed an  overall design of decentralized data marketplace that takes care of data integrity and trading procedure such as buyout and subsciption on distributed ledger.
+The previous work proposed different solution to specific issues of data marketplace. In this paper, we had an  overall design of decentralized data marketplace that takes care of data integrity and trading procedure such as buyout and subscibing to future data on distributed ledger.
 
 \section{\normalsize\textbf{System Architecture}}
 Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, data providers who upload data, data consumers who search for interested products and issue a new trade, and brokers who interact between data providers and consumers, including data uploading, product metadata generation and trading process.
@@ -101,18 +101,26 @@ Brokers represent data providers and consumers to do computing tasks since broke
     \label{fig:system_design}
 \end{figure}
 
-\subsection{Component}
+\subsection{Components}
 \subsubsection{Masked Authenticated Messaging}
-IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency for the IoT industry based on a the distributed  ledger consists of a directed acyclic graph(DAG) of individual transactions, \textbf{Tangle}. The innovative consensus algorithm allows people to make \textbf{zero-transactions} that one could store information securely within Tangle transactions. Nevertheless, publishing encrypted streaming data to distributed ledgers is still a challenge, which one need to keep the address and session key per message, otherwise attackers could easily issue spam transactions if publishing with the same address.
+IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency while MAM is the second layer data communication protocol built on top of Tangle. 
 
-However, MAM resolves this problem, it is a second layer data communication protocol enables to emit and access an encrypted data stream over Tangle network and ensures data integrity.
-It publishes each message to different addresses that each can be derived from the previous one, this forms a MAM channel. Furthermore, a session key can be provided to control the visibility and access to a MAM channel.
+MAM resolves the challenge to publish encrypted streaming data to distributed ledgers. It publishes messages encrypted with a \textbf{session key} to \textbf{channel}, which is a form of transactions that each address can be derived from the previous one. Therefore, with \textbf{channel root}, the first message of a channel, and the session key, all data on the channel is accessible. 
+
+One can create multiple channels as possible, however, the size of a channel is fixed which is decided before creation, thus data providers should decide how to distribute data product into MAM channels. While the creation of a MAM channel is time-consuming, brokers are also responsible for channel creation, encrypted data publishing and session key certification in our system. See Figure \ref{fig:launching_product}  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{launching_product}
+	\caption{The process of launching a product.}
+	\label{fig:launching_product}
+\end{figure}
 
 \subsubsection{TangleID}
 TangleID\cite{TangleID} is a self-soverign identity system based on IOTA that do not require any third-party authority to verify an identity and its digital footprint. In TangleID, the digital footprint is converted into digital assets with the principle of Decentralized Identifiers (DIDs)\cite{DID} defined by W3C, and by putting DID documents on MAM makes TangleID a GDPR-Complianced system. With every participant in data marketplace registers on TangleID, one can easily verify data providers' identity to ensure the data persistency from data sources.
 
 \subsubsection{Ethereum Smart Contract}
-Smart contract\cite{smartContract} is a protocol for formulating agreement on blockchain that provides verification and execution of the contract. The code in the smart contract could interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are transparent and with enforcement. The appearance of smart contracts makes trading more flexible, and achieves more complex trading patterns in reality.
+Smart contract is a protocol for formulating agreement on blockchain that provides verification and execution of the contract. The code in the smart contract could interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are transparent and with enforcement. The appearance of smart contracts makes trading more flexible, and achieves more complex trading patterns in reality.
 
 \subsubsection{Blind Signature}
  It is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it.
@@ -133,13 +141,6 @@ At the beginning, the registrar creates a Registration Contract, which maintains
 
 \subsection{Launching and Searching Products}
 To sell the streaming data, a data provider has to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract. Each product has a Product Contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{launching_product}
-	\caption{The process of launching a product.}
-	\label{fig:launching_product}
-\end{figure}
 
 Brokers certify session keys as well. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
