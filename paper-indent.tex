@@ -70,20 +70,20 @@ By solving the inefficiency of the Blockchain, \textbf{IOTA}\cite{IOTAwhitepaper
 
 On the basis of the Tangle and MAM, IOTA foundation launched a Data Marketplace\cite{IOTADataMarket} which is suitable for IoT streaming data that not only allows data providers to put data on Tangle without any trusted cloud services, but also allow providers and consumers to trade on Tangle and protect privacy and assure data integrity from source with MAM. Nevertheless, the platform design is centralized, new devices require manual approval from IOTA foundation to be visible in the marketplace. Also, interacting with Tangle is still the bottleneck for low-level devices especially in an unstable network or electricity environment.
 
-A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a trustless and highly resourced device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.  
+A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a trustless and highly resourced device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.
 
 The sustainability of IoT economic system is under discussion by Dusit Niyato et al.\cite{UtilityStruct}. They evaluated the utility structure of data trading and presented game theory model with the utility structure which provides a way to find out the Nash Equilibrium. The existence of Nash Equilibrium can help us to determine if the policy of the decentralized data marketplace can ensure a sustainable system. However, few things didn't be mentioned in their work including refund and subscription economy.
 
 The previous work proposed different solution to specific issues of data marketplace. In this paper, we had an  overall design of decentralized data marketplace that takes care of data integrity and trading procedure such as buyout and subscibing to future data on distributed ledger.
 
 \section{\normalsize\textbf{System Architecture}}
-Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, data providers who publish data, data consumers who search for interested products and issue a new trade, and brokers who interact between data providers and consumers, including data publishing, product metadata generation and trading process.
+Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, data providers who upload data, data consumers who search for interested products and issue a new trade, and brokers who interact between data providers and consumers, including data uploading, product metadata generation and trading process.
 
 \subsection{Participants}
 There are four major roles in the decentralized data marketplace (Figure \ref{fig:system_design}).
 
 \subsubsection{Registrar}
-The registrar is responsible for creating a Registration Contract, which maintains a lookup table of participants, and has the authority to control the participant lists of the decentralized data marketplace. 
+The registrar is responsible for creating a Registration Contract, which maintains a lookup table of participants, and has the authority to control the participant lists of the decentralized data marketplace.
 
 \subsubsection{Data Provider}
 Data providers, who generate and preserve streaming data, are willing to sell streaming data to consumers and receive subscription fees from consumers, which can be used to improve the quantity and accuracy of their device or service.
@@ -92,7 +92,7 @@ Data providers, who generate and preserve streaming data, are willing to sell st
 Consumers aspire to obtain streaming data to promote the value of their service. However, it is a big challenge for most consumers to collect the desired data by themselves. So they look forward to purchasing the streaming data from data providers.
 
 \subsubsection{Broker}
-Brokers represent data providers and consumers to do computing tasks since brokers are expected to have higher resource. Some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker is requested to deal with the trading process and publish the provider’s data streams to the MAM channel. For each product, brokerage fees will be charged by the broker.
+Brokers represent data providers and consumers to do computing tasks since brokers are expected to have higher resource. Some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each product, brokerage fees will be charged by the broker.
 
 \begin{figure}[h]
     \centering
@@ -103,17 +103,17 @@ Brokers represent data providers and consumers to do computing tasks since broke
 
 \subsection{Components}
 \subsubsection{Masked Authenticated Messaging}
-IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency while MAM is the second layer data communication protocol built on top of Tangle. 
+IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency while MAM is the second layer data communication protocol built on top of Tangle.
 
-MAM resolves the challenge to publish encrypted streaming data to distributed ledgers. It publishes messages encrypted with a \textbf{session key} to \textbf{channel}, which is a form of transactions that each address can be derived from the previous one. Therefore, with \textbf{channel root}, the first message of a channel, and the session key, all data on the channel is accessible. 
+MAM resolves the challenge to publish encrypted streaming data to distributed ledgers. It publishes messages encrypted with a \textbf{session key} to \textbf{channel}, which is a form of transactions that each address can be derived from the previous one. Therefore, with \textbf{channel root}, the first message of a channel, and the session key, all data on the channel is accessible.
 
-One can create multiple channels as possible, however, the size of a channel is fixed which is decided before creation, thus data providers should decide how to distribute data product into MAM channels. While the creation of a MAM channel is time-consuming, brokers are also responsible for channel creation, encrypted data publishing and session key certification in our system. See Figure \ref{fig:launching_product}  
+One can create multiple channels as possible, however, the size of a channel is fixed which is decided before creation, thus data providers should decide how to distribute data product into MAM channels. While the creation of a MAM channel is time-consuming, brokers are also responsible for channel creation, encrypted data publishing and session key certification in our system. See Figure \ref{fig:launching_product}
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{launching_product}
-	\caption{The process of launching a product.}
-	\label{fig:launching_product}
+    \centering
+    \includegraphics[width=0.4\textwidth]{launching_product}
+    \caption{The process of launching a product.}
+    \label{fig:launching_product}
 \end{figure}
 
 \subsubsection{TangleID}
@@ -123,10 +123,10 @@ TangleID\cite{TangleID} is a self-soverign identity system based on IOTA that do
 Smart contract is a protocol for formulating agreement on blockchain that provides verification and execution of the contract. The code in the smart contract could interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are transparent and with enforcement. The appearance of smart contracts makes trading more flexible, and achieves more complex trading patterns in reality.
 
 \subsubsection{Blind Signature}
- It is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to send the secret key of MAM channel to smart contract without knowing it.
+It is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it.
 
 \subsubsection{IPFS}
-Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to publish the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
+Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to upload the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
 
 \section{\normalsize\textbf{Trading Model}}
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
@@ -154,44 +154,44 @@ Brokers certify session keys as well. Only one session key can be signed in each
 The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and start trading with the data provider if the consumer is interested in subscribing the data.
 
 \subsection{Trading}
-The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who wants to subscribe the streaming data that is generated in the future pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract. 
+The whole trading process is shown in Figure \ref{fig:trading_product}. Once a consumer who wants to subscribe the streaming data that is generated in the future pays a subscription fee to the Product Contract, it is added to the consumers list automatically by the smart contract.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{trading_product}
-	\caption{The process of the product trading.}
-	\label{fig:trading_product}
+    \centering
+    \includegraphics[width=0.4\textwidth]{trading_product}
+    \caption{The process of the product trading.}
+    \label{fig:trading_product}
 \end{figure}
 
 Next, session key $k$ should be exchanged between data provider and consumers as shown in Figure \ref{fig:key_exchange}. The data provider can obtain public keys of each consumer from the Registration Contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the Product Contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to get the session key $k$ and signature $Sign(k)$.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{key_exchange}
-	\caption{Session key exchange process between the data provider and consumer.}
-	\label{fig:key_exchange}
+    \centering
+    \includegraphics[width=0.5\textwidth]{key_exchange}
+    \caption{Session key exchange process between the data provider and consumer.}
+    \label{fig:key_exchange}
 \end{figure}
 
 Consumers can obtain the broker's public key on the Registration Contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
 
 \subsection{Refunding}
-It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transfered to the data provider until data is generated and published to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
+It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transfered to the data provider until data is generated and uploaded to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
 
 \begin{equation}
-    F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) -F_{t}
+    F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) (1-F_{t})
 \end{equation}
 
 \begin{equation}
-    F_{Broker}(i) = N price \frac{i-1}{M} F_{b} -F_{t}
+    F_{Broker}(i) = N price \frac{i-1}{M} F_{b} (1-F_{t})
 \end{equation}
 
 \begin{equation}
-    F_{Consumer}(i) = price \frac{M-i+1}{M} -F_{t}
+    F_{Consumer}(i) = price \frac{M-i+1}{M} (1-F_{t})
 \end{equation}
 
-where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ (\%) is the brokerage fee which is expressed as a percentage, $F_{t}$ is the transaction fee of the smart contract, $N$ is the number of consumers in this contract.
+where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ is the brokerage fee(\%), $F_{t}$ is the transaction fee of the smart contract(\%), $N$ is the number of consumers in this contract.
 
-To refund or withdraw subscription fee from the smart contract, data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for transaction fee. We assume that only a half of the expected records are published to the MAM channel. When $F_{b}$ is 5\%, the data provider and broker can withdraw a half of total subscription fee from the smart contract and 5\% of the subscription fee belongs to the broker while the remaining belongs to the data provider. For consumers, they can get a half refund which should be deducted the transaction fee.
+To refund or withdraw subscription fee from the smart contract, data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for transaction fee. We assume that only a half of the expected records are uploaded to the MAM channel. For the data provider and broker, they can withdraw a half of total subscription fee from the smart contract and $F_{b}$ \% belongs to the broker while the remaining belongs to the data provider. For consumers, they can get a half refund which should be deducted the transaction fee.
 
 On the other hand, we would consider the situation that one of the consumers requests a refund in our future work. When the consumer is disappointed with the data quality, it may request a refund. Its permit should be cancelled while other consumers are unaffected.
 
@@ -223,20 +223,20 @@ Al-Fagih et al. presented\cite{DataPrice} $P_s$ is sigmoid function of $P_r$, an
 To evaluate the behavior of the model we presented, first, we would express the function of $P_s$ and $C_{maintain}$ as function of $P_r$ respectively. Therefore, the sum of subscription fee of all subscriber can be expressed as
 
 \begin{equation} \label{sub_fee}
-P_s = R \frac{e^{a (P_r - b)}}{1 + e^{a (P_r - b)}}
+    P_s = R \frac{e^{a (P_r - b)}}{1 + e^{a (P_r - b)}}
 \end{equation}
 
 where $a$ and $b$ are tuning factors, and $R$ is the maximun data value.
 And we would express the cost of maintenance as
 
 \begin{equation} \label{C_mtn}
-C_{maintain} = ce^{P_r - d}
+    C_{maintain} = ce^{P_r - d}
 \end{equation}
 Where $c$ and $d$ is tuning factor.
 
 Substitute Eq. (\ref{sub_fee}) and Eq. (\ref{C_mtn}) into Eq. (\ref{payoff}). We can derive
 \begin{equation} \label{payoff_Pr}
-\sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot R \frac{e^{a (P_r - b)}}{1 + e^{a (P_r - b)}}) - ce^{P_r - d}]}
+    \sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot R \frac{e^{a (P_r - b)}}{1 + e^{a (P_r - b)}}) - ce^{P_r - d}]}
 \end{equation}
 
 Let tuning factors $, a = 0.15, b = 50, R = 10000, c = 1, d = 88$, and there is only one maintenance period has happened and one maintenance period consists of 12 rounds which means $m = 1, n = 12$. Based on these parameters, we can plot the payoff function as function of accuracy, $Pr$ which is Figure.\ref{fig:payoff_pic}. The maximun point occurs at $accuracy \approx 92\%$ which we point it out with red dot.
@@ -249,7 +249,7 @@ Figure.\ref{fig:payoff_pic} illustratres the market mechanism of the subscriptio
 %Data Auction
 The data auction process is a data trading mechanism and an economically-driven scheme that establishes corresponding prices of data products through bidding process between consumers and providers. While there has been many auction models\cite{BigPicDataMarket} in several areas, only a few of research focus on third-party auction platform. Our proposed decentralized data marketplace protects the privacy of participants which reveals the minimum information for validation and reduces the suspicion of trust to centralized parties or auctioneers. However, the auction process between multiple participants and analyzing potential threats are still critical issues that need to be resolved.
 
- 
+
 % ---- Bibliography ----
 \bibliographystyle{IEEEtran}
 \bibliography{references}
