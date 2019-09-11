@@ -77,7 +77,7 @@ The sustainability of IoT economic system is under discussion by Dusit Niyato et
 The previous work proposed different solution to specific issues of data marketplace. In this paper, we had an  overall design of decentralized data marketplace that takes care of data integrity and trading procedure such as buyout and subscibing to future data on distributed ledger.
 
 \section{\normalsize\textbf{System Architecture}}
-Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, data providers who upload data, data consumers who search for interested products and issue a new trade, and brokers who interact between data providers and consumers, including data uploading, product metadata generation and trading process.
+Our proposed data marketplace framework is a 3-tier decentralized architecture with a registrar who is responsible for marketplace registration in order to put participants' information on distributed ledgers for validation, data providers who publish data, data consumers who search for interested products and issue a new trade, and brokers who interact between data providers and consumers, including data publishing, product metadata generation and trading process.
 
 \subsection{Participants}
 There are four major roles in the decentralized data marketplace (Figure \ref{fig:system_design}).
@@ -92,7 +92,7 @@ Data providers, who generate and preserve streaming data, are willing to sell st
 Consumers aspire to obtain streaming data to promote the value of their service. However, it is a big challenge for most consumers to collect the desired data by themselves. So they look forward to purchasing the streaming data from data providers.
 
 \subsubsection{Broker}
-Brokers represent data providers and consumers to do computing tasks since brokers are expected to have higher resource. Some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker is requested to deal with the trading process and upload the provider’s data streams to the MAM channel. For each product, brokerage fees will be charged by the broker.
+Brokers represent data providers and consumers to do computing tasks since brokers are expected to have higher resource. Some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker is requested to deal with the trading process and publish the provider’s data streams to the MAM channel. For each product, brokerage fees will be charged by the broker.
 
 \begin{figure}[h]
     \centering
@@ -123,10 +123,10 @@ TangleID\cite{TangleID} is a self-soverign identity system based on IOTA that do
 Smart contract is a protocol for formulating agreement on blockchain that provides verification and execution of the contract. The code in the smart contract could interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are transparent and with enforcement. The appearance of smart contracts makes trading more flexible, and achieves more complex trading patterns in reality.
 
 \subsubsection{Blind Signature}
- It is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to upload the secret key of MAM channel to smart contract without knowing it.
+ It is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Blind signature\cite{blindSig} is a form of digital signature where the message is first "blinded" by a random "blinding factor", then passed to a signer to sign. The resulting message, along with the blinding factor, can be later verified with the signer's public key. In our system design, brokers would perform blind signature during the process of adding new products for data providers, in order to send the secret key of MAM channel to smart contract without knowing it.
 
 \subsubsection{IPFS}
-Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to upload the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
+Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to publish the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
 
 \section{\normalsize\textbf{Trading Model}}
 In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
@@ -175,23 +175,23 @@ Next, session key $k$ should be exchanged between data provider and consumers as
 Consumers can obtain the broker's public key on the Registration Contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
 
 \subsection{Refunding}
-It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transfered to the data provider until data is generated and uploaded to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
+It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transfered to the data provider until data is generated and published to the MAM channel. If the expected data is not available, consumers can ask for refunds. We assume that less than half of consumers in the Product Contract are irrational and malicious. Each consumer can vote for refunding at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transfered to the data provider, broker and every consumer. The subscription fee can be prorated as below:
 
 \begin{equation}
-    F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) (1-F_{t})
+    F_{DataProvider}(i) = N price \frac{i-1}{M} (1-F_{b}) -F_{t}
 \end{equation}
 
 \begin{equation}
-    F_{Broker}(i) = N price \frac{i-1}{M} F_{b} (1-F_{t})
+    F_{Broker}(i) = N price \frac{i-1}{M} F_{b} -F_{t}
 \end{equation}
 
 \begin{equation}
-    F_{Consumer}(i) = price \frac{M-i+1}{M} (1-F_{t})
+    F_{Consumer}(i) = price \frac{M-i+1}{M} -F_{t}
 \end{equation}
 
-where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ is the brokerage fee(\%), $F_{t}$ is the transaction fee of the smart contract(\%), $N$ is the number of consumers in this contract.
+where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ (\%) is the brokerage fee which is expressed as a percentage, $F_{t}$ is the transaction fee of the smart contract, $N$ is the number of consumers in this contract.
 
-To refund or withdraw subscription fee from the smart contract, data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for transaction fee. We assume that only a half of the expected records are uploaded to the MAM channel. For the data provider and broker, they can withdraw a half of total subscription fee from the smart contract and $F_{b}$ \% belongs to the broker while the remaining belongs to the data provider. For consumers, they can get a half refund which should be deducted the transaction fee.
+To refund or withdraw subscription fee from the smart contract, data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for transaction fee. We assume that only a half of the expected records are published to the MAM channel. When $F_{b}$ is 5\%, the data provider and broker can withdraw a half of total subscription fee from the smart contract and 5\% of the subscription fee belongs to the broker while the remaining belongs to the data provider. For consumers, they can get a half refund which should be deducted the transaction fee.
 
 On the other hand, we would consider the situation that one of the consumers requests a refund in our future work. When the consumer is disappointed with the data quality, it may request a refund. Its permit should be cancelled while other consumers are unaffected.
 
