@@ -101,12 +101,20 @@ Brokers represent data providers and consumers to do computing tasks in the DLT 
     \label{fig:system_design}
 \end{figure}
 
-\subsection{Component}
+\subsection{Components}
 \subsubsection{Masked Authenticated Messaging}
-IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency for the IoT industry based on a the distributed  ledger consists of a directed acyclic graph(DAG) of individual transactions, \textbf{Tangle}. The innovative consensus algorithm allows people to make \textbf{zero-transactions} that one could store information securely within Tangle transactions. Nevertheless, publishing encrypted streaming data to distributed ledgers is still a challenge, which one need to keep the address and session key per message, otherwise attackers could easily issue spam transactions if publishing with the same address.
+IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency while MAM is the second layer data communication protocol built on top of Tangle. 
 
-However, MAM resolves this problem, it is a second layer data communication protocol enables to emit and access an encrypted data stream over Tangle network and ensures data integrity.
-It publishes each message to different addresses that each can be derived from the previous one, this forms a MAM channel. Furthermore, a session key can be provided to control the visibility and access to a MAM channel.
+MAM resolves the challenge to publish encrypted streaming data to distributed ledgers. It publishes messages encrypted with a \textbf{session key} to \textbf{channel}, which is a form of transactions that each address can be derived from the previous one. Therefore, with \textbf{channel root}, the first message of a channel, and the session key, all data on the channel is accessible. 
+
+One can create multiple channels as possible, however, the size of a channel is fixed which is decided before creation, thus data providers should decide how to distribute data product into MAM channels. While the creation of a MAM channel is time-consuming, brokers are also responsible for channel creation, encrypted data publishing and session key certification in our system. See Figure \ref{fig:launching_product}  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{launching_product}
+	\caption{The process of launching a product.}
+	\label{fig:launching_product}
+\end{figure}
 
 \subsubsection{TangleID}
 TangleID\cite{TangleID} is a self-soverign identity system based on IOTA that do not require any third-party authority to verify an identity and its digital footprint. In TangleID, the digital footprint is converted into digital assets with the principle of Decentralized Identifiers (DIDs)\cite{DID} defined by W3C, and by putting DID documents on MAM makes TangleID a GDPR-Complianced system. With every participant in data marketplace registers on TangleID, one can easily verify data providers' identity to ensure the data persistency from data sources.
@@ -134,13 +142,6 @@ At the beginning, the registrar creates a Registration Contract, which maintains
 \subsection{Launching and Searching Products}
 
 To sell the streaming data, a data provider has to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and Product Contract. Each product has a Product Contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{launching_product}
-	\caption{The process of launching a product.}
-	\label{fig:launching_product}
-\end{figure}
 
 Brokers certify session keys as well. Only one session key can be signed in each product, so data providers can't fake a session key to deceive consumers. However, it is a risk revealing session keys to brokers since contents may be copied by brokers, which causes data providers' loss. Therefore, Blind signature is used to prevent the situation. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to ceritfy new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
