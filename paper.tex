@@ -72,7 +72,7 @@ On the basis of the Tangle and MAM, IOTA foundation launched a Data Marketplace\
 
 A different framework design proposed by Gupta, S.Kanhere and Jurdak\cite{3tierDataMarket} could reduce the burden of low-level devices as mentioned. The infrastructure is a 3-tier decentralized data marketplace architectural design with Ethereum smart contract which consists of provider, consumer and broker. Where broker is a trustless and highly resourced device that will facilitate the trading of data between the consumer and providers. However, the data integrity and authentication of each participant are still future work.  
 
-The sustainability of IoT economic system is under discussion by Dusit Niyato et al.\cite{UtilityStruct}. They evaluated the utility structure of data trading and presented game theory model with the utility structure which provides a way to find out the Nash Equilibrium. The existence of Nash Equilibrium can help us to determine if the policy of the decentralized data marketplace can ensure a sustainable system. However, few things didn't be mentioned in their work including refund and subscription economy.
+The sustainability of IoT economic system is under discussion by Dusit Niyato et al.\cite{UtilityStruct}. They evaluated the utility structure of data trading and presented game theory model.  Data marketplace organizers can determine their policies to ensure a sustainable system with the Nash Equilibrium found by game theory and the utility structure. However, refund and subscription economy were not mentioned in their work.
 
 The previous work proposed different solution to specific issues of data marketplace. In this paper, we had an  overall design of decentralized data marketplace that takes care of data integrity and trading procedure such as buyout and subscibing to future data on distributed ledger.
 
@@ -129,7 +129,7 @@ Smart contract is a protocol for formulating agreement on blockchain that provid
 Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible to publish the metadata of products, including title, data provider information and data preview to IPFS in order to provide users with search capabilities to meet the consumers' need.
 
 \section{\normalsize\textbf{Trading Model}}
-In the following, we describe the data trading process in detail. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
+In the following, we describe the data trading process in detail and we would use game theory to ensure the sustainability of our tading model. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and could be traded afterward. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
 
 The consumer will pay for the data, only when the data sold by the data provider with high enough quality/accuracy, which we called these data as decent data.
 Once the accuracy is lower than a certain threshold, which we called these data as unacceptable data, the consumers would consider this data provider as a low quality data provider, and stop buying data from this data provider.
@@ -196,28 +196,38 @@ To refund or withdraw subscription fee from the smart contract, data provider, b
 On the other hand, we would consider the situation that one of the consumers requests a refund in our future work. When the consumer is disappointed with the data quality, it may request a refund. Its permit should be cancelled while other consumers are unaffected.
 
 \subsection{Game Theory Evaluation}
-Game Theory is a methodology to discuss strategic interaciton among game players. If we can ensure Nash Equilibrium of decentralized data marketplace exists at certain acceptable range, then we can promise the sustainability of decentralized data marketplace. Fan Liang et al\cite{SurveyBigDataPricing} listed several different types of game theory models which are applied on data pricing. To describe the scenario more precisely, we decided to use repeated game to build our game theory model which meets the scenario of subscription economy more.
+Game Theory is a methodology to discuss strategic interaciton among game players. If we can ensure Nash Equilibrium of decentralized data marketplace exists at certain acceptable range, then we can promise the sustainability of decentralized data marketplace. Fan Liang et al\cite{SurveyBigDataPricing} listed several different types of game theory models which are applied on data pricing. We choose repeated game to build our game theory model. Repeated game consists of several repetitions of the same base game which meets the scenario of data subscription.
 
 Figure.\ref{fig:decision_tree} shows the decision tree to depict the the repeated game we used. Each level in this decision tree represents each round of data transmission from data provider to consumers, and the consumers would pay subscription fee, $p_s$, each person. The sum of all the subscription fee pays to data provider is denoted as $P_s$.
 
 \begin{figure} \centering \includegraphics[width=3.3in]{decision_tree} \caption{Decision Tree}
     \label{fig:decision_tree} \end{figure}
-For every $n$ round, the data provider would cost $C_{maintain}$ to maintain or enhance the sensors that data provider owns. We call this as a maintain period. Moreover, the value of data and the cost of maintenance will decrease as time pass, so we introduce a discounted factor $\beta$ to depict this phenomena.
+For every $n$ round, the data provider would pay $C_{maintain}$ to enhance the sensors that data provider owns. We call this as a maintain period. Moreover, the value of data and the cost of maintenance will decrease as time pass, so we introduce a discounted factor $\beta$ to depict this phenomena.
 
 We have these following assumptions:
-\begin{itemize}
-    \item  There is no any other data providers provide the same product in Data Marketplace. Therefore, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
-    \item  More than 51\% of consumers are among complete information exchange state. In other words, once one of them launches voting for stopping buying data and refunding, they would succeed in refund voting.
-    \item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine the data quality. If unacceptably low accuracy data are delivered to consumers, this examiner will spread this information out.
-    \item  We assume the number of dishonest consumers is really small, so it can be negleted.
-\end{itemize}
+\begin{enumerate}
+    \item  We assume consumers are rational. \label{rational_man}
+    \item  Each data provider monopoly of the product they produced. \label{monopoly}
+    \item  Subscription fee only depends on data quality. \label{fee_vs_quality}
+    \item  At least 51\% of consumers are in the same group which has complete information exchange.\label{51_in_group} 
+    \item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine the data quality. \label{1_in_51}
+\end{enumerate}
+
+According to \textbf{assumption(\ref{rational_man})}, we learn that few consumers would take malicious actions in this system, since all the consumers are rational.
+
+\textbf{Assumption(\ref{monopoly})} implies there is no other data providers provide the same product in Data Marketplace. In this way, we can consider each provider's behavior independently. That means this decision tree represent the behavior of only one data provider.
+
+From \textbf{assumption(\ref{51_in_group})}, we derive one thing that once one of any consumer in that group launches voting for stopping buying data (in other words, the comsumer annonces the data quality is not acceptable), they would succeed in rejecting the processing subscription.
+
+\textbf{Assumption(\ref{1_in_51})}  implies if unacceptably low accuracy data are delivered to consumers, the examiner will spread this information out.
+
 
 Based on the description above, the discounted sum of payoff for our repeated game is
 \begin{equation} \label{payoff}
     \sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
 
-Al-Fagih et al. presented\cite{DataPrice} $P_s$ is sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game. We will discuss more in the next section.
+Al-Fagih et al. presented\cite{DataPrice} $P_s$ is sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is about a exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game.
 
 \subsubsection{Numerical Example}
 To evaluate the behavior of the model we presented, first, we would express the function of $P_s$ and $C_{maintain}$ as function of $P_r$ respectively. Therefore, the sum of subscription fee of all subscriber can be expressed as
@@ -247,7 +257,7 @@ Figure.\ref{fig:payoff_pic} illustratres the market mechanism of the subscriptio
 
 \section{\normalsize\textbf{Future Work}}
 %Data Auction
-The data auction process is a data trading mechanism and an economically-driven scheme that establishes corresponding prices of data products through bidding process between consumers and providers. While there has been many auction models\cite{BigPicDataMarket} in several areas, only a few of research focus on third-party auction platform. Our proposed decentralized data marketplace protects the privacy of participants which reveals the minimum information for validation and reduces the suspicion of trust to centralized parties or auctioneers. However, the auction process between multiple participants and analyzing potential threats are still critical issues that need to be resolved.
+The data auction process is a data trading mechanism and an economically-driven scheme that establishes corresponding prices of data products through bidding process between consumers and providers. While there has been many auction models\cite{BigPicDataMarket} in several areas, only a few of research focus on third-party auction platform. Our proposed decentralized data marketplace protects the privacy of participants which reveals the minimum information for validation and reduces the suspicion of trust to centralized parties or auctioneers. However, the auction process between multiple participants and analysis of potential threats are still critical issues that need to be resolved. The game theory model presented in this work, we assume each data provider's behavior is independent. However, normally there would be multiple data providers provide similar product (substitution). Only one provider is taken into considerations at present.
 
  
 % ---- Bibliography ----
