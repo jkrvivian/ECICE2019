@@ -80,16 +80,17 @@ Our proposed data marketplace framework is a 3-tier de-centralized architecture 
 There are four major roles in the decentralized data marketplace (Figure \ref{fig:system_design}).
 
 \subsubsection{Registrar}
-The registrars are responsible for creating a Registration Contract, which maintains a lookup table of participants, and has the authority to control the participant lists of the decentralized data marketplace. 
+Registrars have access to create and maintain Registration Contracts, a lookup table of participants in decentralized data marketplace. 
+
 
 \subsubsection{Data Provider}
-Data providers, who generate and preserve streaming data, are willing to sell streaming data to consumers and receive subscription fees from consumers, which can be used to improve the quantity and accuracy of their device or service.
+Data providers generate and preserve streaming data. With the profit through trading process, they can improve the quality and quantity of data.
 
 \subsubsection{Consumer}
-Consumers aspire to obtain streaming data to improve the value of their service. However, it is a significant challenge for most consumers to collect the desired data by themselves. So they look to purchasing the streaming data from data providers.
+Consumers aspire to obtain streaming data to improve the value of their service. However, it is a significant challenge and cost to collect the desired data by themselves. So they look to purchasing the streaming data from data providers.
 
 \subsubsection{Broker}
-Brokers delegate data providers and consumers to perform computing tasks as brokers are expected to have ample resources. Trustworthy brokers that meet the requirement of the  conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker would deal the trading process and publish the their data streams to the MAM channel. For each product, brokerage fees will be charged by the broker.
+Brokers delegate data providers and consumers to perform computing tasks as brokers are expected to have ample resources. Trustworthy brokers that meet the requirement of the conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker would charge brokerage fees to deal the trading process and publish their data streams to the MAM channel.
 
 \begin{figure}[h]
     \centering
@@ -110,13 +111,13 @@ MAM is a second layer data communication protocol built on the feeless and scala
 \end{figure}
 
 \subsubsection{TangleID}
-The TangleID\cite{TangleID} is a self-sovereign identity system based on IOTA that do not require any third-party authority to verify an identity and its digital footprint. With TangleID, the digital footprint is converted into digital assets under the principle of Decentralized Identifiers (DIDs)\cite{DID} defined by W3C. Posting DID documents on MAM makes TangleID a GDPR-Complianced system. Every participant in the data marketplace registers on TangleID, hence one can easily verify data providers' identity to ensure the data persistency from data sources.
+The TangleID\cite{TangleID} is a self-sovereign identity system based on IOTA that does not require any third-party authority to verify an identity and its digital footprints. TangleID converts digital footprints into Decentralized Identifiers (DIDs)\cite{DID}Documents defined by W3C and publishes to MAM channels. Each participant is required to register on TangleID and performs digital signature with key pairs recorded on DID Documents, thus participants' identity could be easily verified and data persistency of a product could be ensured.
 
 \subsubsection{Ethereum Smart Contract}
 Smart contract is a protocol for formulating agreement on a blockchain that provides verification and execution of the contract. The code in the smart contract can interact with other contracts, make decisions, store data and transfer cryptocurrency. All conditions and states established in the contract are enforeced with transparency. The appearance of smart contracts meet different requirements of trading pattern.
 
 \subsubsection{Blind Signature}
-Blind signature\cite{blindSig} is used to prevent the situation that the a broker would stole data if a session key is not encryted. In fact, blind signature is a form of digital signature where the message is first "blinded" by a random "blinding factor", and then passed to a signer to confirm. The encrypted message, along with the blinding factor, can be later verified with the signer’s public key. In our design, brokers would perform blind signature during the process of adding new products for data providers, in order to send session keys of MAM channel to smart contract without knowing it.
+Blind signature\cite{blindSig} is used to prevent the situation that the a broker would stole data if a session key is not encryted. In fact, blind signature is a form of digital signature where the message is first "blinded" by a random "blinding factor", and then passed to a signer to confirm. The encrypted message, along with the blinding factor, can be later verified with the signer’s public key.
 
 \subsubsection{IPFS}
 Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but all IPFS users. In our proposed architecture, brokers are responsible for publishing metadata to IPFS, including titles, data provider information and data preview, in order to provide users with searching capabilities.
