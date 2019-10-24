@@ -213,9 +213,8 @@ Based on the description above, the discounted sum of payoff for our repeated ga
     \sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
 
-Al-Fagih et al. presented\cite{DataPrice} $P_s$ is sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is approximately an exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game.
+Al-Fagih et al. presented\cite{DataPrice} the quality of data $P_s$ is sigmoid function of $P_r$, and based on rule of thumb $C_{maintain}$ is approximately an exponential function of $P_r$. We can substitute $P_s$ and $C_{maintain}$ with $P_r$ into Eq. (\ref{payoff}), then we can find out the Nash Equilibrium of repeated game.
 
-\subsubsection{Numerical Example}
 To evaluate the behavior of the model we presented, first, we would express the function of $P_s$ and $C_{maintain}$ as functions of $P_r$ respectively. Therefore, the sum of subscription fee of all subscriber can be expressed as
 
 \begin{equation} \label{sub_fee}
