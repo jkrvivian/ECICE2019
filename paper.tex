@@ -90,14 +90,7 @@ IOTA\cite{IOTAwhitepaper} is a feeless and scalable cryptocurrency while MAM is 
 
 MAM resolves the challenge to publish encrypted streaming data to distributed ledgers. It publishes messages encrypted with a \textbf{session key} to the \textbf{channel}, which is a form of transaction where each address can be derived from the previous one. Therefore, with each \textbf{channel root}—the first message of a channel and the session key—all data on the channel is accessible.
 
-One can create multiple channels, however, the size of a channel is fixed which is decided before creation. Thus data providers need to firstly decide how to distribute data product into MAM channels. While the creation of a MAM channel is time-consuming, brokers are also responsible for channel creation, encrypted data publishing and session key certification in our system. See Figure \ref{fig:launching_product}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{launching_product}
-    \caption{The process of launching a product.}
-    \label{fig:launching_product}
-\end{figure}
+One can create multiple channels, however, the size of a channel is fixed which is decided before creation. Thus data providers need to firstly decide how to distribute data product into MAM channels. While the creation of a MAM channel is time-consuming, brokers are also responsible for channel creation, encrypted data publishing and session key certification in our system.
 
 \subsubsection{Decentralized Identifiers}
 The TangleID\cite{TangleID} is a self-sovereign identity system that does not require any third-party authority to verify an identity and its digital footprint. With it, the digital footprint is converted into digital assets under the principle of Decentralized Identifiers (DIDs)\cite{DID} defined by W3C. Posting DID documents on MAM makes TangleID a GDPR-Complianced system\cite{GDPR}. Every participant in the data marketplace registers on TangleID, hence one can easily verify data providers' identity to ensure the data persistency from data sources.
@@ -123,37 +116,23 @@ Refunds are a major issue in our research. However, we do not need to take refun
 At the beginning, the egistrar creates a registration contract, which maintains all participants' information, including their DID documents and public keys. Anyone can query participants' public keys. Those who would like to sell or purchase data may register to become a data provider or consumer. The registrar has the authority to agree with applications. After that, their identities are available in the registration contract and the launching and trading processes can begin.
 
 \subsection{Launching and Searching Products}
-To sell streaming data, a data provider needs to launch a new product on the data marketplace in advance as shown in Figure \ref{fig:launching_product}. The data provider determines a trusted broker and asks the broker to create a new MAM channel and product contract. Each product has a product contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
+To sell streaming data, a data provider needs to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and product contract. Each product has a product contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
 
-Brokers certify session keys as well. Only one session key can be signed in each product, so data providers cannot fake a session key to deceive consumers. Figure \ref{fig:key_certification} shows the certification process. When a data provider asks a broker to certify new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
+Brokers certify session keys as well. Only one session key can be signed in each product, so data providers cannot fake a session key to deceive consumers. When a data provider asks a broker to certify new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{key_certification}
-    \caption{Session key certification process with blind signature.}
-    \label{fig:key_certification}
+    \includegraphics[width=0.5\textwidth]{key_certification_exchange}
+    \caption{Session key certification with blind signature and session key exchange.}
+    \label{fig:key_certification_exchange}
 \end{figure}
 
 The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and initiates the trading with the data provider if the consumer is interested in subscribing to the data.
 
 \subsection{Trading}
-The entire trading process is as shown in Figure \ref{fig:trading_product}. Once a consumer who wants to subscribe certain streaming data that is generated  pays a subscription fee to the product contract, he/she is added to the consumers list automatically by the smart contract.
+Once a consumer who wants to subscribe certain streaming data that is generated  pays a subscription fee to the product contract, he/she is added to the consumers list automatically by the smart contract.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{trading_product}
-    \caption{The process for the product trading.}
-    \label{fig:trading_product}
-\end{figure}
-
-Next, session key $k$ should be exchanged between the data provider and consumers as shown in Figure \ref{fig:key_exchange}. The data provider can obtain public keys of each consumer from the registration contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the product contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to obtain the session key $k$ and signature $Sign(k)$.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{key_exchange}
-    \caption{Session key exchange process between the data provider and consumer.}
-    \label{fig:key_exchange}
-\end{figure}
+Next, session key $k$ should be exchanged between the data provider and consumers. The data provider can obtain public keys of each consumer from the registration contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the product contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to obtain the session key $k$ and signature $Sign(k)$.
 
 Consumers can obtain the broker's public key on the registration contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
 
