@@ -75,7 +75,7 @@ Data providers, who generate and preserve streaming data, are willing to sell st
 Consumers aspire to obtain streaming data to promote the value of their service. However, it is a significant challenge for most consumers to collect the desired data by themselves, so they look to purchasing the streaming data from data providers.
 
 \subsubsection{Broker}
-Brokers represent data providers and consumers to perform computing tasks as brokers are expected to have higher resource. Some trustworthy brokers who pass procedures for conformity assessment are added to the decentralized data marketplace. Once a qualified data provider requests to launch a new product, the broker is requested to deal with the trading process and publish the provider’s data streams to the MAM channel. Brokerage fees for each product will be charged by the broker.
+Brokers represent data providers and consumers to deal with the trading process and publish the provider’s data streams as brokers are expected to have higher resource. Brokerage fees for each product will be charged by the broker.
 
 \begin{figure}[h]
     \centering
@@ -105,12 +105,7 @@ There is inherent risk in revealing session keys to brokers since contents may b
 Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for storing and accessing files, websites, applications, and data in a distributed file system which is not maintained with certain nodes or entities but is with all IPFS users. In our proposed architecture, brokers are responsible to publish the metadata of products, including title, data provider information and data preview to the IPFS in order to provide users with search capabilities to meet the consumers' need.
 
 \section{\normalsize\textbf{Trading Model}}
-In the following, we describe the data trading process in detail where we use game theory to ensure the sustainability of our trading model. To participate a data marketplace, data providers and consumers have to register first. Then data provider can launch its product on the marketplace. Once a product is launched, it is searchable and can be subsequently traded. The whole trading and refunding process is defined in smart contracts which are easily traceable and irreversible.
-
-The consumer will pay for the data, only when the data sold by the data provider sufficiently accurate, for which we called such data "decent data."
-Once the accuracy is lower than a certain threshold, which we call "unacceptable data," the consumers would then consider this data provider as a low quality data provider, and stop buying data from this data provider.
-
-Refunds are a major issue in our research. However, we do not need to take refund as a factor in our game theory model, since in our decentralized data marketplace we use a smart contract to store the subscription fee which will be paid to buy the future data. The subscription fee will be paid as new data is transmitted to consumers. In other words, the data provider does not need to perform any procedures to transfer subscription fees from his/her own account to consumers' accounts. For the same reason, data providers have no responsibility on refunding processing fees charged by the smart contract.
+In the following, we describe the data registration, production launching, product searching and trading process in detail where we use game theory to ensure the sustainability of our trading model. The whole process is defined in smart contracts which are easily traceable and irreversible.
 
 \subsection{Participant Registration}
 At the beginning, the egistrar creates a registration contract, which maintains all participants' information, including their DID documents and public keys. Anyone can query participants' public keys. Those who would like to sell or purchase data may register to become a data provider or consumer. The registrar has the authority to agree with applications. After that, their identities are available in the registration contract and the launching and trading processes can begin.
@@ -132,9 +127,7 @@ The contract address and product description will be stored in a file which is u
 \subsection{Trading}
 Once a consumer who wants to subscribe certain streaming data that is generated  pays a subscription fee to the product contract, he/she is added to the consumers list automatically by the smart contract.
 
-Next, session key $k$ should be exchanged between the data provider and consumers. The data provider can obtain public keys of each consumer from the registration contract. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the product contract. Consumers listen to the smart contract event which is triggered when the ciphertext is updated, and decrypt the ciphertext to obtain the session key $k$ and signature $Sign(k)$.
-
-Consumers can obtain the broker's public key on the registration contract as well, so they can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
+Next, session key $k$ should be exchanged between the data provider and consumers. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the product contract. Consumers decrypt the ciphertext from the product contract to obtain the session key $k$ and signature $Sign(k)$. Consumers can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
 
 \subsection{Refunding}
 It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transferred to the data provider until data is generated and published to the MAM channel. If the expected data is not available, consumers can request refunds. We assume that a very small percentage of consumers in the product contract are irrational and/or malicious. Each consumer can vote for a refund at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transferred to the data provider, broker and every consumer. The subscription fee can be prorated as below:
@@ -153,9 +146,7 @@ It is probable that the streaming data sources are delayed or even interrupted a
 
 where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ (\%) is the brokerage fee which is expressed as a percentage, $F_{t}$ is the transaction fee of the smart contract, $N$ is the number of consumers in this contract.
 
-To refund or withdraw subscription fees from the smart contract, the data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for the transaction fee. We assume that only a half of the expected records are published to the MAM channel. When $F_{b}$ is 5\%, the data provider and broker can withdraw half of the total subscription fee from the smart contract and 5\% of the subscription fee belongs to the broker while the remaining belongs to the data provider. For consumers, they can receive half of the subscription fee refunded which should be deducted from the transaction fee.
-
-Considering the situation that one of the consumers requests a refund in the future, when the consumer is disappointed with the data quality, he/she may request a refund.
+To refund or withdraw subscription fees from the smart contract, the data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for the transaction fee.
 
 \subsection{Game Theory Evaluation}
 Game Theory is a methodology to discuss strategic interaciton among game players. If we can ensure Nash Equilibrium of decentralized data marketplace exists at a certain acceptable range, then we can promise the sustainability of decentralized data marketplace. Fan Liang et al\cite{SurveyBigDataPricing} listed several different types of game theory models which are applied to data pricing. We employed repeated games to build our game theory model. Repeated games consists of several repetitions of the same base game which meets the scenario of data subscription.
