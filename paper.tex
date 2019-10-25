@@ -101,7 +101,7 @@ Inter-Planetary File system(IPFS)\cite{IPFS} is a peer-to-peer network for stori
 In the following, we describe the data registration, production launching, product searching and trading process in detail where we use game theory to ensure the sustainability of our trading model. The whole process is defined in smart contracts which are easily traceable and irreversible.
 
 \subsection{Participant Registration}
-At the beginning, the registrar creates a registration contract, which maintains all participants' information, including their DID documents and public keys. Anyone can query participants' public keys. Those who would like to sell or purchase data may register to become a data provider or consumer. The registrar has the authority to agree with applications. After that, their identities are available in the registration contract and the launching and trading processes can begin.
+At the beginning, the registrar creates a Registration Contract, which maintains all participants' information, including their DID documents and public keys. Everyone can query others' public keys for validation but only registrars have permission to add new members. After registration, the launching and trading processes can begin.
 
 \subsection{Launching and Searching Products}
 To sell streaming data, a data provider needs to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and product contract. Each product has a product contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
