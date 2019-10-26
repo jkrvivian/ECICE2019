@@ -104,9 +104,9 @@ In the following, we describe the data registration, production launching, produ
 At the beginning, the registrar creates a Registration Contract, which maintains all participants' information, including their DID documents and public keys. Everyone can query others' public keys for validation but only registrars have permission to add new members. After registration, the launching and trading processes can begin.
 
 \subsection{Launching and Searching Products}
-To sell streaming data, a data provider needs to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and product contract. Each product has a product contract to record the participants, subscription price brokerage fee, quantity of data and  trading process.
+To sell streaming data, a data provider needs to launch a new product on the data marketplace in advance. The data provider determines a trusted broker and asks the broker to create a new MAM channel and product contract. Each product has a product contract to record the participants, subscription price brokerage fee, quantity of data and trading process.
 
-Brokers certify session keys as well. Only one session key can be signed in each product, so data providers cannot fake a session key to deceive consumers. When a data provider asks a broker to certify new session key $k$, the data provider uses the broker's public key, which is available in the Registration Contract after the broker's registration, as a blinding factor, and the session key is blinded. Then the data provider sends the blinded session key $Blind(k)$ to the broker. The broker signs the message and returns the signature $Sign(Blind(k))$ to data provider. The data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
+Brokers certify session keys as well. Only one session key can be signed for each product, so data providers cannot fake a session key to deceive consumers. To certify a session key $k$, the data provider first blinds the session key with broker's public key from Registration Contract and sends $Blind(k)$ to the broker. The broker signs it and returns the signature $Sign(Blind(k))$ back, then the data provider removes the blinding factor and obtains the broker's signature of the session key, $Sign(k)$, which is verifiable by consumers.
 
 \begin{figure}[h]
     \centering
@@ -115,12 +115,12 @@ Brokers certify session keys as well. Only one session key can be signed in each
     \label{fig:key_certification_exchange}
 \end{figure}
 
-The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags. The consumer then evaluates the product and initiates the trading with the data provider if the consumer is interested in subscribing to the data.
+The contract address and product description will be stored in a file which is uploaded to IPFS. Consumers can search the desired product by keywords or tags and then launch a trading process for interested products.
 
 \subsection{Trading}
-Once a consumer who wants to subscribe certain streaming data that is generated  pays a subscription fee to the product contract, he/she is added to the consumers list automatically by the smart contract.
+Once a consumer subscribes to certain streaming data that is generated pays a subscription fee to the purchase contract, he/she is added to the consumers list automatically by the smart contract.
 
-Next, session key $k$ should be exchanged between the data provider and consumers. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the product contract. Consumers decrypt the ciphertext from the product contract to obtain the session key $k$ and signature $Sign(k)$. Consumers can verify that the signature is valid and the session key is the only one that is certified by the broker. Afterward, encrypted data is published to the MAM channel, and consumers can obtain and decrypt it with the session key.
+Next, session key $k$ should be exchanged between the data provider and consumers. For each consumer, the data provider encrypts the session key and broker's signature with the consumer's public key and sends the ciphertext $Encrypt(k + Sign(k))$ to the purchase contract. Consumers can decrypt $Encrypt(k + Sign(k))$ to obtain and verify the session key $k$ and signature $Sign(k)$. Afterward, consumers can access data with session key on the MAM channel.
 
 \subsection{Refunding}
 It is probable that the streaming data sources are delayed or even interrupted after the consumers pay the subscription fee. To protect consumer rights, the subscription fee are not transferred to the data provider until data is generated and published to the MAM channel. If the expected data is not available, consumers can request refunds. We assume that a very small percentage of consumers in the product contract are irrational and/or malicious. Each consumer can vote for a refund at any time. If the ratio of consent votes of refunding is higher than the $threshold$ at the $i$th piece of data, the subscription fee is proportionally transferred to the data provider, broker and every consumer. The subscription fee can be prorated as below:
@@ -137,12 +137,12 @@ It is probable that the streaming data sources are delayed or even interrupted a
     F_{Consumer}(i) = price \frac{M-i+1}{M} -F_{t}
 \end{equation}
 
-where $price$  is the subscription price, $M$ is the number of expected data samples, $F_{b}$ (\%) is the brokerage fee which is expressed as a percentage, $F_{t}$ is the transaction fee of the smart contract, $N$ is the number of consumers in this contract.
+where $price$ is the subscription price, $M$ is the number of expected data samples, $F_{b}$ (\%) is the brokerage fee which is expressed as a percentage, $F_{t}$ is the transaction fee of the smart contract, $N$ is the number of consumers in this contract.
 
 To refund or withdraw subscription fees from the smart contract, the data provider, broker, and consumer send a transaction to execute the smart contract and are responsible for the transaction fee.
 
 \subsection{Game Theory Evaluation}
-Game Theory is a methodology to discuss strategic interaciton among game players. If we can ensure Nash Equilibrium of decentralized data marketplace exists at a certain acceptable range, then we can promise the sustainability of decentralized data marketplace. Fan Liang et al\cite{SurveyBigDataPricing} listed several different types of game theory models which are applied to data pricing. We employed repeated games to build our game theory model. Repeated games fits the scenario of data subscription.
+Game Theory is a methodology to discuss strategic interaction among game players. We can ensure the sustainability of decentralized data marketplace by proving the existence of Nash Equilibrium at a certain acceptable range. Fan Liang et al\cite{SurveyBigDataPricing} listed several different types of game theory models in data pricing, and we employ repeated games which fits the scenario of data subscription to build our game theory model.
 
 Each consumer would pay subscription fee, $p_s$, each time they receive data from data provider. The sum of all the subscription fee paid to the data provider is denoted as $P_s$.
 
@@ -154,19 +154,13 @@ Following assumptions are made:
     \item  Each data provider is the sole provider of the product they produced. \label{monopoly}
     \item  Subscription fees only depends on data quality. \label{fee_vs_quality}
     \item  At least 51\% of consumers are in the same group which has complete information exchange.\label{51_in_group}
-    \item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine  data quality. \label{1_in_51}
+    \item  One of the consumers who has complete information exchange with other 51\% buyers has the ability to examine data quality. \label{1_in_51}
 \end{enumerate}
 
-According to \textbf{assumption(\ref{rational_man})}, we learn that few consumers would take malicious actions in this system, since all the consumers are rational.
-
-\textbf{Assumption(\ref{monopoly})} implies there is no other data providers providing the same product in the data marketplace. In this way, we can consider each provider's behavior independently. That means this decision tree represents the behavior of only one data provider.
-
-From \textbf{assumption(\ref{51_in_group})}, we derive that one of any consumer in that group launches voting for stopping buying data (in other words, the consumer announces the data quality is not acceptable), they would succeed in rejecting the processing subscription.
-
-\textbf{Assumption(\ref{1_in_51})}  implies if unacceptably low accuracy data are delivered to consumers, the examiner will spread this information out.
+According to \textbf{Assumption(\ref{rational_man})}, we learn that few consumers would take malicious actions in this system, since all the consumers are rational. \textbf{Assumption(\ref{monopoly})} implies each product is unique in the data marketplace. Therefore, each provider's behavior independently and the decision tree represents the behavior of only one data provider. From \textbf{Assumption(\ref{51_in_group})}, we derive that any consumer in that group launches voting for refund (i.e., the consumer announces the data quality is not acceptable) would succeed. \textbf{Assumption(\ref{1_in_51})}  implies if unacceptably low accuracy data are delivered to consumers, the examiner will spread this information out.
 
 
-Based on the description above, the discounted sum of payoff for our repeated game is
+Based on the assumptions above, the discounted sum of payoff for our repeated game is
 \begin{equation} \label{payoff}
     \sum_{i=0}^{m - 1}{\beta^{in}\cdot [(\sum_{j=0}^{n - 1} \beta^j \cdot P_s) - C_{maintain}]}
 \end{equation}
@@ -187,11 +181,11 @@ And we would express the cost of maintenance as
 \end{equation}
 Where $c$ and $d$ are tuning factors.
 
-Substitute Eq. (\ref{sub_fee}) and Eq. (\ref{C_mtn}) into Eq. (\ref{payoff}). We can derive an equation illustrating the market mechanism of the subscription trading policy we used under the decentralized data marketplace. First, data providers have weak motivation to operate their sensor in low accuracy, since the incentive of low quality data is much less than moderate quality data. Second the great deficit at high accuracy is mostly derived by the rapid increasing of maintenance cost. Thus, if the maintenance fee to achieve decent data quality is under a fair price range, then data provider will automatically provide data with high enough data quality under our assumptions.
+Substitute Eq. (\ref{sub_fee}) and Eq. (\ref{C_mtn}) into Eq. (\ref{payoff}). We can derive an equation illustrating the market mechanism of the subscription trading policy in the proposed decentralized data marketplace. First, data providers have weak motivation to operate their sensor in low accuracy, since the incentive of low quality data is much less than moderate quality data. Second, the great deficit at high accuracy is mostly derived by the rapid increasing of maintenance cost. Thus, if the maintenance fee to achieve decent data quality is under a fair price range, then data provider will automatically provide data with high data quality under our assumptions.
 
 \section{\normalsize\textbf{Future Work}}
 %Data Auction
-The data auction process is a data trading mechanism and an economically-driven scheme that establishes corresponding prices of data products through bidding process between consumers and providers. While there has been many auction models\cite{BigPicDataMarket} in several areas, there has been minimal research on third-party auction platforms. Our proposed decentralized data marketplace protects the privacy of participants which reveals the minimum information for validation and reduces the suspicion of trust to centralized parties or auctioneers. However, the auction process between multiple participants and analysis of potential threats are still critical issues that need to be resolved. For the game theory model presented in this work, we assume each data provider's behavior is independent. However, normally there would be multiple data providers providing similar products (substitutions). Only one provider is taken into considerations at present.
+The data auction process is a data trading mechanism and an economically-driven scheme that establishes corresponding prices of data products through bidding process between consumers and providers. While there has been many auction models\cite{BigPicDataMarket} in several areas, only minimal research focus on third-party auction platforms. Our proposed decentralized data marketplace protects the privacy of participants which reveals the minimum information for validation and reduces the suspicion of trust to centralized parties or auctioneers. However, the auction process between multiple participants, analysis of potential threats and an overall game theory evaluation are still critical issues that need to be resolved.
 
 
 % ---- Bibliography ----
